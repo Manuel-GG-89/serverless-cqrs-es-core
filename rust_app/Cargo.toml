@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "aggregates_common_lib", 
+    "aggregates_handlers/order/command_handler",
+    "aggregates_handlers/order/event_handler"
+]

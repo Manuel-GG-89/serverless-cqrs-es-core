@@ -1,0 +1,27 @@
+{
+    "arguments": {
+      "operation": {
+        "type": "ChangeOrderStatus",
+        "id": "1",
+        "lastEventNumber": 1,
+        "orderStatus": "cancelled"
+      }
+    },
+    "identity": {
+      "username": "admin_user",
+      "sourceIp": [
+        "192.168.1.1"
+      ],
+      "userAgent": "Mozilla/5.0",
+      "groups": [
+        "Admins",
+        "Editors"
+      ]
+    },
+    "source": {},
+    "info": {
+      "fieldName": "changeOrderStatus",
+      "parentTypeName": "Mutation",
+      "variables": {}
+    }
+  }

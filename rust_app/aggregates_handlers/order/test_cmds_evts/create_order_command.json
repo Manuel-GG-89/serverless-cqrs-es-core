@@ -1,0 +1,23 @@
+{
+    "arguments": {
+      "operation": {
+        "type": "CreateOrder",
+        "id": "1",
+        "userId": "1",
+        "productId": "1",
+        "quantity": 1
+      }
+    },
+    "identity": {
+      "username": "admin_user",
+      "sourceIp": ["192.168.1.1"],
+      "userAgent": "Mozilla/5.0",
+      "groups": ["Admins", "Editors"]
+    },
+    "source": {},
+    "info": {
+      "fieldName": "createOrder",
+      "parentTypeName": "Mutation",
+      "variables": {}
+    }
+}

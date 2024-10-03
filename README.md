@@ -28,15 +28,13 @@ Resources, tools and technical stuffs:
   - Rust lambda runtimes to reduce Coltdown Start at minimal.
   - Shared Type Schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle or  compilation/build time.
 
-  Basic Composition:
-    A Domain Aggregate have, at least: 
+  Basic Composition. A Domain Aggregate have, at least: 
+
       - A Command Handler with a Rules/Policies validator 
       - An Event Handler that just save events emited from (self and/or external) Commands Handlers
       - An Event Store to save the events
-      - A Query handler that make posible do querys and get states from one o more aggregate instances to the Event Store (Dynamodb)
-        and makes Querys.
-      - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate
-        reading the event store (historical) events
+      - A Query handler that make posible do querys and get states from one o more aggregate instances to the Event Store (Dynamodb) and makes Querys.
+      - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregatereading the event store (historical) events
       - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
       - An async api.
 

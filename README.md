@@ -5,7 +5,7 @@ note: The first sketches and proofs of concepts were developed in Typescript/Pyt
       ...now rewriting same things in Rust (just the functions) 
 
 Objetive: 
-  - Achive the most simple and lowcost way to mount a Serverless, Event Driven, Event Sourced CQRS core service on AWS
+  - To achive the most simple and lowcost way to mount a Serverless, Event Driven, Event Sourced CQRS core service on AWS
   - Done by making three / four common (almost generics) decopuled Domain Aggregates that cover most common cases of interactions
   - Without using frameworks, just AWS CDK.
   - No CDK meta programing or templating magic.. Aggregate1 -> aggregate1stack.ts, Aggregate2 -> Copy/Paste and Modify ggregate1stack.ts, and so.

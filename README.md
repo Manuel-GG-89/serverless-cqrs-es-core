@@ -12,7 +12,7 @@ note 1: The first sketches and proofs of concepts were developed in Typescript/P
 
 note 2: Front-end servers aren´t considered on this project yet.. (But some serverless Node framework hosted on a lowcost Cloud provider will be considered in the future).
 
-note 3: The next proyect: To decopule from AWS, try the same goal with other lowcost cloud providers like Cloudflare.
+note 3: The next proyect: To decopule from AWS, try the same goal with other lowcost cloud providers like Cloudflare or any other that a third world team can finance..
 
 
 Objetive: 

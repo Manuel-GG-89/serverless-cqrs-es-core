@@ -75,7 +75,7 @@ So.. why Graphq and not an http api with webhooks?
   - An async api.
 
 
-This is a blank project for CDK development with TypeScript.
+This is project build with AWS CDK TypeScript.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 

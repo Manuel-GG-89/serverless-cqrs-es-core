@@ -1,9 +1,11 @@
 This is just a prof of concept in EARLY... early state. 
 and, yes.. for the time being, fully coupled to the AWS platform.
 
-note: The first sketches and proofs of concepts were developed in Typescript/Python... 
+note 1: The first sketches and proofs of concepts were developed in Typescript/Python... 
       ...now rewriting same things in Rust (just the functions) 
 note 2: Front-end servers are cont considered on this project yet.. (But some serverless Node like framework hosted on Cloudflare will be considered in the future.
+note 3: The next proyect: To decopule from AWS, try the same goal with other lowcost cloud providers like Cloudflare.
+
 
 Objetive: 
   - To achive the most simple and lowcost way to mount a Serverless, Event Driven, Event Sourced CQRS core service on AWS

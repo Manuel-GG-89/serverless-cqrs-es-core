@@ -37,7 +37,7 @@ Resources, tools and technical stuffs:
 
       - A Command Handler with a Rules/Policies validator 
       - An Event Handler that just save events emited from (self and/or external) Commands Handlers
-      - An Event Store to save the events
+      - An Event Store to store the events
       - A Query handler that make posible do querys and get states from one o more aggregate instances to the Event Store (Dynamodb) and makes Querys.
       - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregatereading the event store (historical) events
       - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.

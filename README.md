@@ -24,9 +24,9 @@ Objetive:
 
 Challenge stuffs (outside the obvious things):
   - Keep it simple.
-  - To reduce Coltdown Start times to the minimum possible... (currently using simplest rust functions..  minimal coldown start time)
   - Security layers / Authentication / Authorization.
   - Outside async comunication via websockets (Graphql, Appsync on AWS) (to front-end servers / functions. Never directly to client sides apps)
+  - To reduce Coltdown Start times to the minimum possible... (currently using simplest rust functions..  minimal coldown start time)
 
 Resources, tools and technical stuffs:
   - AWS CDK to declare and configure all resources (default typescript cdk version)
@@ -37,7 +37,7 @@ Resources, tools and technical stuffs:
   - No relational database. Just Dynamodb as an events store (historical events, no mutatios)
   - No http/rest apis, no webhooks. Graphql (Appsync) acting like pub-sub midleware to expose commands (async operations) and handle (simple) querys from front-end servers
   - Rust lambda runtimes to reduce Coltdown Start at minimal.
-  - Shared Type Schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle or  compilation/build time.
+  - Shared Type schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle and compilation/build time (easy on Rust and Typescript).
 
 
 Why Graphql as API ?

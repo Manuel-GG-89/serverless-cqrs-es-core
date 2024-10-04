@@ -4,7 +4,7 @@ and, yes.. for the time being, fully coupled to the AWS platform.
 note 1: The first sketches and proofs of concepts were developed in Typescript/Python... 
       ...now rewriting same things in Rust (just the functions) 
       
-note 2: Front-end servers are cont considered on this project yet.. (But some serverless Node like framework hosted on Cloudflare will be considered in the future.
+note 2: Front-end servers aren´t considered on this project yet.. (But some serverless Node like framework hosted on Cloudflare will be considered in the future.
 
 note 3: The next proyect: To decopule from AWS, try the same goal with other lowcost cloud providers like Cloudflare.
 

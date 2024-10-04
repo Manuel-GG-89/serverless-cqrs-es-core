@@ -41,7 +41,8 @@ Resources, tools and technical stuffs:
 
 
 Why Graphql ?
-  - External systems (SSR web server for example) must communicate to this system in terms of asynchronous commands (explicit orders of what needs to be done or mounted in the system, and in terms of asynchronous queries to request updated information from the system). Let's see a couple of examples to understand the problem:
+  - External systems (SSR web servers, for example) must communicate to this system in terms of asynchronous commands, (explicit orders of what needs to be done in the system), and in terms of asynchronous queries to request updated information from the system. Let's see a couple of examples to understand the problem:
+    
   - Suppose a customer needs to make a hotel reservation. The front-end service (usually an SSR server) needs to send the request to the core in the form of a Command, specifying what is wanted, along with the required parameters to the 'Reservation Domain Aggregate Endpoint':
   - The Reservation_Aggregate (the grapql endpoint) needs to proccess the command “createReservation { userId: asdf1234, roomID: adsf1234, dateStart: ‘some date’, dateEnd: ‘some other date’} meanwhile, the SSR server needs to wait for the response of the request (command) to show the user if the request could finally be processed and approved, or if a bussine rule validation occurred.
   - The endpoint (command-handler component of an aggregate) will not respond immediately, since the request, before generating any change in the system, must be validated in terms of business rules and then:

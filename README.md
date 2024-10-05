@@ -64,7 +64,7 @@ Why Graphql as API ?
 So.. why Graphq and not an http api with webhooks?
   - Easy implementation of a sub-pub communication model.
   - Default asynchronous communication
-  - Websockets under the hood, which provides more security, speed, and reduces the number of connections and redundant queries.
+  - Websockets under the hood, which provides more security, speed, and reduces the number of connections and redundant requests.
   - If webhooks were to handle asynchronous communication, the client (server client) would need to repeatedly query the webhook until a result is obtained (redundancy, resource wastage) and would also need to consider the configuration of parameters such as the frequency for querying the webhooks and the corresponding timeouts.
   - ...So far, this is the best option I’ve found to achieve that result, but there might be better ones. So, before implementing the communication interfaces, I’ll need to research again, I think.
 

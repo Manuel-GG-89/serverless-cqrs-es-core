@@ -73,7 +73,7 @@ So.. why Graphq and not an http api with webhooks?
   - A Command Handler with a Rules/Policies validator 
   - An Event Handler that just save events emited from (self and/or external) Commands Handlers
   - An Event Store to store the events
-  - A Query handler that make posible do querys and get states from one o more aggregate instances to the Event Store (Dynamodb) and makes Querys.
+  - A Query handler that make posible do query to the Event Store (Dynamodb) and get states from one o more aggregate instances.
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
   - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
   - An async api.

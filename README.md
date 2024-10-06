@@ -1,7 +1,7 @@
 This is just a prof of concept in EARLY... early state. 
 and, yes.. for the time being, fully coupled to the AWS platform.
 
-nomta -1: Domain Driven Design...
+nota -1: Domain Driven Design...
   
 note 0: This project is intended only as a System Core. Could it be used for the core of a web application? Yes, but not in the same way you would usually expect. There is no mutation, no CRUD, i
 

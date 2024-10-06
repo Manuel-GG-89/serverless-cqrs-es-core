@@ -78,22 +78,50 @@ Basic composition of a Domain Aggregate have, at least:
   - An async api.
 
 
-
-
-Marco teorico: 
+Theoretical framework:
   - https://www.google.com/search?q=domain+driven+design&oq=domain+driven+design - "Domain Driven Design" ( DDD )
   - https://www.youtube.com/watch?v=GzrZworHpIk  - "Event Sourcing You are doing it wrong by David Schmitz"
 
-So, Domain Driven Desing..
+Then: Domain Driven Desing..
   
-  - En la filosofia del Diseño Guiado por el Dominio (y, paradojicamente, casi en cualquier projecto de ingenieria de software) la fase mas importante (en la que se deberia invertir mas tiempo)  es la fase inicial: Diseño y especificaciones.
-  - A menos que el proyecto se esté desarrollando por un equipo de I+D, un equipo con desarrolladores sin dominio de las tecnologias qeu se pretenden utiliazr, o por un equipo que, debido a la presion de stakholders ambiciosos y jefaturas que ignoran lo desastrozo y caro que en que se puede convertir un proyecto si se comieza a desarrollar sobre la marcha y sin tener un entendimiento claro de cuales son los comportamientos y flujos para poder diseñar en base a ello, los ingenieros de software, desarrolladores front-end/back-end y analistas, en conjunto con los usuarios del futuro sistema (si es que los hay) deberían enfocarser en comprender y obtener la mayor cantidad posible de retroalimentacion para , con esta,  describir cada interacion y flujo del sistema, posibles errores, flujos alternativoss, tareas periodicas automatizadas o periodicas, casos borde, etc.  
-  - Para cada Historia de Usuario (interaccion con el sistema, llamados 'casos de uso' en otros tipos de sistemas) se debe identificar el comportamiento, reglas de negocio, flujo de la informacion, intervencion de otros usuarios o sistemas en dicho flujo.
-  - Antes de desarrollar cualquier linea de codigo, se debe identificar el comportamiento que el software deberia tener para cada caso. Se debe tener en cuanta la mayor cantidad retroalimentacion por parte de los usuarios que utilizarán el sistema (los cuales son parte fundamental en esta fase), o bien, en caso de que sea un sistema nuevo, una idea consistente de lo que se espera conseguir para poder definir las especificaciones nombradas anteriormente.
-  - Solo al tener cubierto todas las 'historias de usuario' y flujos del sistema, se debe pasar a la fase de desarrollo. Y lo anterior toma tiempo. Lo nomrmal seria que tomara aproximadamente el 70% del del tiempo (y costo) del proyecto. (tristemente.... esto no suele ser asi, no al menos el pais que vivo).
-  - En el DDD lo mas importante es la comprension, retroalimentacion y diseño de las historias que se produciran dentro del sistema. DDD es el marco de diseño un sistema en base su comportamiento,  NO en base a los modelos de datos (entidades) del dominio.
-  - Pero la implementacion tecnica de un sistema DDD es desafiante, tiene complejidades que puedn hacer que arquitectos decidan utilizar frameworks e infraestructuras costosas que intente manejar estas complejidas, o sencillamente descartarla y optar por lo tradicional (diseño basado en el modelo de datos) que, a la larga, resultan ser monoliticas, dificiles de escalar, y considerablemente más costosas si se requiere explisitamente obtener las caracteristicas que un sistema DDD puede brindar por defecto ...  (Una descripcion mas detllada un poco mas detallada sobre este ultimo punto la dejaré mas abajo).
-  - Es este último punto es lo que intento abordar en este proyecto.. 
+  - In the Domain Driven Design philosophy (and, paradoxically, in almost any software engineering project) the most important phase, in which more time should be invested, is the initial phase: Design and specifications.
+  - Unless the project is being developed by an I+D team,or other one with developers without mastery of the technologies that are intended to be used, or by a team that, due to pressure from ambitious stakeholders and management who ignore how disastrous and expensive a project can become if it is started to be developed on the fly and without having a clear understanding of what the behaviors and flows are in order to design based on them, software engineers, front-end/back-end developers and analysts, together with the users of the future system (if there are any) must focus on understanding and obtaining as much feedback as possible in order to describe each interaction and flow of the system, possible errors, alternative flows, automated or periodic periodic tasks, edge cases, etc. - For each User Story (interaction with the system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified.
+  - Before developing any line of code, the behavior that the software should have for each case must be identified. The greatest amount of feedback from the users who will use the system (which are a fundamental part of this phase) must be taken into account, or, in the case of a new system, a consistent idea of ​​what is expected to be achieved, in order to define the specifications mentioned above.
+  - Only when all the 'user stories' and system flows have been covered, should one move on to the development phase. And the above takes time. Normally it would take approximately 70% of the time (and cost) of the project. (sadly... this is not usually the case, at least not in the country I live in).
+  - In DDD, the most important thing is the understanding, feedback and design of the stories that will be produced within the system. DDD is the design framework for a system based on its behavior, NOT based on the data models (entities) of the domain.
+  - But the technical implementation of a DDD system is challenging, it has complexities that can make architects decide to use expensive frameworks and infrastructures that try to handle these complexities, or simply discard it and opt for the traditional (data model-based design) that, in the long run, turn out to be monolithic, difficult to scale, andconsiderably more expensive if it is explicitly required to obtain the features that a DDD system can provide by default... (A more detailed description of this last point will be left below).
+  - It is this last point that I try to address in this project.
+
+
+
+
+
+..So, what offer a sistem designed like this that really pay the effort???
+  
+  - Traceability and Consistency: The most important point in terms of the value it can bring to the business. ..Why? 
+
+    - Event Sourced: Allows reconstructing the system state from a sequence of events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the  historical operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces (information that can be really valuable for the business). (... I mean, social networks?, finan 
+    
+    - CQRS: Separates read and write operations, optimizing data performance and consistency.
+
+      
+  - Decoupling: Separates the domain logic from the infrastructure, facilitating changes in the business without affecting the technological infrastructure.
+    
+  - Scalability and Resilience:/
+    - Stateless: Reduces the load on the server by not storing state between requests, allowing for greater scalability.
+      
+    - Event-Driven: Improves responsiveness and resilience by processing events asynchronously.
+
+
+  - Maintainability: Promotes a more modular and maintainable architecture, where changes in one area of the system have a reduced impact on other areas.
+
+
+In comparison, traditional data model-based systems are super easy develop and implemet but, as they grow in terms of components, entities and volume of data, tend to be more monolithic, less flexible and can have difficulty scaling and adapting to rapid changes in the business. 
+
+
+
+
+
 
 
 

@@ -86,6 +86,7 @@ Basic composition of a Domain Aggregate have, at least:
   - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
   - An async api.
 
+Pseudo Code:
 ```
   - enum CommandHandlerResponse<T, E> {
       Success(T),

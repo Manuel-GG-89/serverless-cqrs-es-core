@@ -118,17 +118,17 @@ Then: Domain Driven Desing..
   
   - Traceability and Consistency: The most important point in terms of the value it can bring to the business. ..Why? 
 
-    - Event Sourced: Allows reconstructing the system state from a sequence of events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the  historical operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces (information that can be really valuable for the business). (... I mean, user behavior in social networks, online stores and marketplaces, financial systems, banking, IoT, logistics... practically everything.
+   - Event Sourced: Allows reconstructing the system state from a sequence of events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the  historical operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces (information that can be really valuable for the business). (... I mean, user behavior in social networks, online stores and marketplaces, financial systems, banking, IoT, logistics... practically everything.
     
-    - CQRS: Separates read and write operations, optimizing data performance and consistency.
+  - CQRS: Separates read and write operations, optimizing data performance and consistency.
 
   - Decoupling: Separates the domain logic from the infrastructure, facilitating changes in the business without affecting the technological infrastructure.
     
   - Scalability and Resilience:
-    - Stateless: Reduces the load on the server by not storing state between requests, allowing for greater scalability.
+  
+  - Stateless: Reduces the load on the server by not storing state between requests, allowing for greater scalability.
       
-    - Event-Driven: Improves responsiveness and resilience by processing events asynchronously.
-
+  - Event-Driven: Improves responsiveness and resilience by processing events asynchronously.
 
   - Maintainability: Promotes a more modular and maintainable architecture, where changes in one area of the system have a reduced impact on other areas.
 

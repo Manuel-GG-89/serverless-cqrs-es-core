@@ -110,7 +110,7 @@ Pseudo Code:
                         ↓
   - >> Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
                         ↓
-  - >> Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrAnyOtherSSRprocess(newEventCreated) ]
+  - Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrAnyOtherSSRprocess(newEventCreated) ]
 ```
 
 

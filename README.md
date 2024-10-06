@@ -99,31 +99,31 @@ The basic flux, happy path:
       Error(E),
   }
 
- Client[ callApiAndWait( doSomethingCommand(commandParams))   >..waiting..>  onCommandRespond(Success(ID))  >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
+ Client[ callApiAndWait( doSomethingCommand(commandParams))   >..waiting..>  onCommandRespond(Success(ID))  → queryAggerateByIdAndWait(ID) >..waiting..> ] 
       
                         ↓                                                                            ↑
   
->> Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
+→ Api[ doSomethingCommand(commandParams) → implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
 
                         ↓
 
->> Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
+→ Command_Handler[ validate_rules(commandParams) → emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
   
                         ↓
   
->> Evento_Bus[ delivers(newEventCreated) ] 
+→ Evento_Bus[ delivers(newEventCreated) ] 
 
                         ↓
 
->> Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newEventCreated)) ] 
+→ Event_Handler[ capture_and_store(newEventCreated) → publish_to_api( onAggregateEventEmited(newEventCreated)) ] 
 
                         ↓
 
->> Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
+→ Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
 
                         ↓
 
->> Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) ] >> end
+→ Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) →  sendToUserUI( Some(newEventCreated) ) ] → end
 
 
 

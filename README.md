@@ -88,31 +88,30 @@ Basic composition of a Domain Aggregate have, at least:
 
 Pseudo Code:
 ```
-  - enum CommandHandlerResponse<T, E> {
+ enum CommandHandlerResponse<T, E> {
       Success(T),
       Error(E),
     }
-  - enum QueryHandlerResponse<T, E> {
+enum QueryHandlerResponse<T, E> {
       Some(T),
       Error(E),
     }
-  - type commandParams = [..inputParams, maybe(ID)]  
+type commandParams = [..inputParams, maybe(ID)]  
 
-  - Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
-                        ↓                                                                            ↑
-  - >> Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
+Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
+                        ↓                                                                     ↑
+Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
                         ↓
-  - >> Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
+Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
                         ↓
-  - >> Evento_Bus[ delivers(newEventCreated) ] 
+Evento_Bus[ delivers(newEventCreated) ] 
                         ↓
-  - >> Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newEventCreated)) ] 
+Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newEventCreated)) ] 
                         ↓
-  - >> Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
+Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
                         ↓
-  - Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) ]
+Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) ]
 ```
-
 
 .. well, it seems like a long and slow proccess... 
 .. meybe not :)

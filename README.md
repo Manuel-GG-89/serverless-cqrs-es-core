@@ -218,7 +218,8 @@ Front-end-servers must communicate via Graphql APIs (websockets under the hood) 
 The second important consideration is that front-end-servers should also communicate with UX/UI clients via websockets and, if possible, also in terms of commands and queries. 
 
 Another consideration is that strategies could be implemented to cache within the context of the SSRs the projections (“current states”) of the recently requested domain aggregate instances, in this way redundant connections and queries to the cores could be avoided. servers. Although there may be trade-offs in adopting this strategy on a global level... but since domain aggregates live in different contexts, separated by well-defined contextual boundaries, each domain can implement a different caching strategy, tailored to the specific needs of that domain. . 
-And the same thing happens with many other technical aspects: various technical and infrastructure parameters at the Core level can (and should) be adapted to each domain aggregate, but it is valid to start with something generic. However, the above DOES NOT APPLY to the general technical decisions, patterns, definitions and conventions that are part of the architecture on which this type of system is based.
+
+And the same thing happens with many other technical aspects: various technical / infrastructure parameters at the Core level can (and should) be adapted to each domain aggregate, but it is valid to start with something generic. However, it DOES NOT APPLY to the general technical decisions, patterns, definitions and conventions that are part of the architecture on which this type of system is based.
 
 Some things that can be configured, evolved, and scaled independently in each domain in your Core are: 
 

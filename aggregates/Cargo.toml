@@ -8,11 +8,11 @@ members = [
     "cores/order_core",
     "handlers/order/commands_handler",
     "handlers/order/events_handler",
-    "handlers/order/querys_handler",
+    "handlers/order/querys_handler", # Not implemented yet
     
-    # Reservation Domain Aggregate
-    "cores/reservation_core",
-    "handlers/order/commands_handler",
-    "handlers/order/events_handler",
-    "handlers/order/querys_handler", "cores/order_core",
+    # Reservation Domain Aggregate 
+    "cores/reservation_core", # Not implemented yet
+    "handlers/order/commands_handler", # Not implemented yet
+    "handlers/order/events_handler", # Not implemented yet
+    "handlers/order/querys_handler", # Not implemented yet
 ]

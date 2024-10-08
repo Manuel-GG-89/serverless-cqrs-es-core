@@ -136,8 +136,6 @@ Why Graphql as API ?
 
 - The SSR has two options: Block the user's UI (the dumb option), OR take for granted that, as the command was already approved, at some point the response with the status of the updated aggregate instance will arrive, and use a tentative strategy... which is to show the user the already updated content with a small warning that the final response is still being processed in the server.... This sounds like React Suspense API to me :). The user's UI is not blocked, and the user can continue doing other things. But if for some internal reason the event does not propagate (timeout) or if an error message is received, then the user is notified that there was an error to validate the request and that he will have to generate it again (a popup or something similar).
 
-Translated with www.DeepL.com/Translator (free version)r 
-
   
   - The graphql aggregate endpoint sends to the aggregate Command-handler component the command (request), and it will not respond immediately since the request, before generating any change in the system, must be validated in terms of business rules, generate and distribute internally an event if the request passed all business rules, or respond immediately with an error if the business rules validation failed through the same request. This operation introduces two cases:
 

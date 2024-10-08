@@ -10,3 +10,4 @@ cdk.out
 # Rust target directory
 */target
 .build
+.vscode/settings.json

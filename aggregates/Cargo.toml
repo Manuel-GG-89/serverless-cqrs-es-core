@@ -1,13 +1,15 @@
 [workspace]
 resolver = "2"
 
+# PROJECT UNDER CONSTRUCTION #
+
 members = [
-    "shared_library",
+    "shared_library", # basic implementation
 
     # Order Domain Aggregate
-    "cores/order_core",
-    "handlers/order/commands_handler",
-    "handlers/order/events_handler",
+    "cores/order_core", # basic implementation
+    "handlers/order/commands_handler", #basic implementation
+    "handlers/order/events_handler", # Basic implementation
     "handlers/order/querys_handler", # Not implemented yet
     
     # Reservation Domain Aggregate 

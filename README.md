@@ -122,7 +122,7 @@ Resources, tools and technical stuffs:
   - Internal communication through EventBridge data bus (not sqs/sns pub-sub pattern, delivery rules configured on the bus)
   - Step functions in case needs to handle transactions (saga pattern) (flow nor even designed yet ...)
   - No relational database. Just Dynamodb as an events store (historical events, no mutatios)
-  - No http/rest apis, no webhooks. Graphql (Appsync) acting like pub-sub midleware to expose commands (async operations) and handle (simple) querys from front-end servers
+  - No http/rest apis, no webhooks. Graphql (Appsync) acting like pub-sub midleware to expose allowed commands and querys (async operations) from each domain aggregate to front-end servers
   - Rust lambda runtimes to reduce Coltdown Start at minimal.
   - Shared Type schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle and compilation/build time (easy on Rust and Typescript).
 

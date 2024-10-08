@@ -41,7 +41,7 @@ Then.. Domain Driven Desing:
     
   - Unless the project is being developed by an I+D team,or other one with developers without mastery of the technologies that are intended to be used, or by a team that, due to pressure from ambitious stakeholders and management who ignore how disastrous and expensive a project can become if it is started to be developed on the fly and without having a clear understanding of what the behaviors and flows are in order to design based on them... Software engineers, front-end/back-end developers and analysts, together with the users of the future system (if there are any) must focus on understanding and obtaining as much feedback as possible in order to describe each possible fact, interaction and flow of the system, possible errors, alternative flows, each possible automated or periodic tasks, edge cases, etc.
 
-  - “Each state of anything in terms of an accumulation of past facts, immutable events. All the stories that could happen in that system and how, through them, we can project the current state (or the state on any past moment since the system started) for each entity in the system.”
+  - “Each state of anything in terms of an accumulation of past facts, immutable events. All the stories that could happen in that system to, through them, project the current state (or the state on any past moment since the system started) for each entity in the system.”
  
   - For each User Story (user that interacts with a DDD system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified at first.
  

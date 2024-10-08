@@ -191,15 +191,15 @@ Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onComma
                         ↓                                                                     ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
                         ↓                                                                     ↑
-Command_Handler[ validate_rules(commandParams) >> validateCommandRules(commandParams) >>  emmit_to_bus(newEventCreated) && responseWithID(newEventCreated.aggregateInstance.ID) ] 
+Command_Handler[ validate_rules(commandParams) >>  emmit_to_bus(newEventCreated) && respond_to_api_with_ID(newEventCreated.aggregateInstance.ID) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 
                         ↓
-Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newAggregateInsanceState)) ] 
+Event_Handler[ capture_and_store(newEventCreated) >> rebuild_new_aggregate_instance() >>  publish_to_api( onAggregateEventEmited(newAggregateInstanceState)) ] 
                         ↓
 Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newAggregateInsanceState)) ) ]
                         ↓
-Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInsanceState)) >>  cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
+Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
 ```
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 

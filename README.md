@@ -43,7 +43,7 @@ Then.. Domain Driven Desing:
 
   - “Each state of anything in terms of an accumulation of past facts, immutable events. All the stories that could happen in that system to, through them, project the current state (or the state on any past moment since the system started) for each entity in the system.”
  
-  - For each User Story (user that interacts with a DDD system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified at first.
+  - For each User Story (user that interacts with a DDD system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified at first in terms of commands, policies (rules) and events. 
  
   - Before developing any line of code, the behavior that the software should have for each case must be identified. The greatest amount of feedback from the users who will use the system (which are a fundamental part of this phase) must be taken into account, or, in the case of a new system, a consistent idea of ​​what is expected to be achieved, in order to define the specifications mentioned above.
  

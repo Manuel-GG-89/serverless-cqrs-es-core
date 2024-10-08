@@ -236,9 +236,11 @@ Some things that can be configured, evolved, and scaled independently in each do
 
 Suppose there is a domain aggregate named “Reservation” from which we want to request a new reservation. Uppercase parameters are MANDATORY for all events and commands that are generated during the flow, regardless of which domain aggregate they belong to. The other parameters are those associated with the particular domain of each aggregate:
 
-... wriiting some diagrams, work in proggress
+... wriiting, fixing and rewriting...  
 
-I'm currently writing more stuff, synthesizing some ideas, and will update this document as I can. The most interesting part comes when you realize the benefits it gives you in distributed systems... and the frequent data caching on the SSR side in the most efficient and simple way... I'm excited.
+Some diagrams will be added soon, work in proggress
+
+I'm currently fixing and rewriting a lot, synthesizing some ideas, and will update this document as I can. The most interesting part comes when you realize the benefits it gives you in distributed systems... and the frequent data caching on the SSR side in the most efficient and simple way... I'm excited.
 
 
 This is project build with AWS CDK TypeScript.

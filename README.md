@@ -190,7 +190,7 @@ type commandParams = [..inputParams, maybe(ID)]
 Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
                         ↓                                                                     ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
-                        ↓
+                        ↓                                                                     ↑
 Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 

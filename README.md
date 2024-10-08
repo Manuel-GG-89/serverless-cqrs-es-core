@@ -1,29 +1,109 @@
-This is just a prof of concept in EARLY... early state. 
-and, yes.. for the time being, fully coupled to the AWS platform.
+This is just an early, very early state proof of concept. A technical attempt to demystify and do something that has already been done for a long time behind the scenes by large tech companies to solve large scale problems in different industries (financial, logistics, marketing, video games, IoT, Robotics, AI, etc, etc.), but taken to terms that it is possible for me, as an average engineer with a very poor education and limited resources, to implement. It is a set of technical proposals and knowledge still under development that I have worked on for many years based on the problems I have had to solve... and how this type of philosophy can contribute immensely outside the context of large tech companies.  
 
-nota -1: Domain Driven Design...
+well ..
+
+This is about software design and architecture. This is about Domain Driven Design... and how to design systems that perceive, interpret, process, interact and remember changes in ourselves and the environment in the way our mind (currently) does... as a succession of immutable events over time that modify our own state and that of the world around us.
+
+note -1: Sorry for the spelling mistakes, English is not my mother speak tongue. For some things I used a translator, for others I wrote them as I went along, sorry for that. Also sorry if I expose the ideas and concepts in a scattered way ... in my defense, this is not a paper, it is just a memory aid for myself, that I hope someday, someone can share and implement.
+
+note 0: This project is intended to make a System Core only and how it communicates internally and externally. Could it be used as Core of a web application? Yes, in fact, that is the goal... the thing is... not in the same way you would usually expect. There is no mutation, no CRUD, ..no database magic under de hood.
+
+note 1: The first sketches and proofs of concepts were developed in Typescript/Python... now rewriting same things in Rust (just the functions). Buy why Rust? only because I consider that, in this context (stateless, serverless web services), you get unsurpassed performance without using the language at low level, just using high-level api features, which is almost like developing in any other popular modern language (it's almost like writing typescript). There is no low level programming here, so there is no need to panic. Also, in essence, you can use whatever language you prefer or best suits each part of the system. It is totally valid that in this type of system, each domain aggregate ('micro-service' in old school terms) uses a different language, which best suits the needs of the domain aggregate.
+
+note 2: Front-end servers aren´t considered on this project yet.. but I will expose some ideas regarding the front-end and how this design be taken advantage of by fron-end system enginners in terms of asynchronous communication and caching by default. 
+
+note 3: For now, this project is intended to be deployed on AWS just for convenience, but with a little creativity, you can set it up entirely on-premises, or on a monolithic Linux server. In that case, you would have to implement by yourself an event bus that allows setting up simple distribution rules, a non-relational database (even json documents would work, it depends on each system), and an asynchronous API that allows connections via websocket and pub-sub communication model (I recommend Grapql).
+
+
+
+
+Theoretical framework:
+
+I highly recommend reading a bit about DDD and its technical aspects in terms of implementation before reading further. I even highly recommend having a conversation with your preferred AI Chat about this topic. There are things that it is better to know beforehand so that my explanations make sense, if I tried to explain them in detail one by one... this would become a papyrus.
+
+so, do some reserch to understand the basics:
+  - https://www.google.com/search?q=domain+driven+design&oq=domain+driven+design - "Domain Driven Design" ( DDD )
+
+Or just skip and go to the interesting things (implementation stuffs):
+  - https://www.youtube.com/watch?v=GzrZworHpIk  - Event Sourcing You are doing it wrong by David Schmitz""
+
+And talk with your AI Chat bot about DDD and how that matches in terms of implementation with Stateless, Event Driven, Event Sourced CQRS architectures.
+
+Then.. Domain Driven Desing:
   
-note 0: This project is intended only as a System Core. Could it be used for the core of a web application? Yes, but not in the same way you would usually expect. There is no mutation, no CRUD, i
+  - In the Domain Driven Design philosophy (and, paradoxically, in almost any software engineering project) the most important phase, in which more time should be invested, is the initial phase: Design and specifications.
+    
+  - Unless the project is being developed by an I+D team,or other one with developers without mastery of the technologies that are intended to be used, or by a team that, due to pressure from ambitious stakeholders and management who ignore how disastrous and expensive a project can become if it is started to be developed on the fly and without having a clear understanding of what the behaviors and flows are in order to design based on them... Software engineers, front-end/back-end developers and analysts, together with the users of the future system (if there are any) must focus on understanding and obtaining as much feedback as possible in order to describe each interaction and flow of the system, possible errors, alternative flows, automated or periodic periodic tasks, edge cases, etc.
+ 
+  - For each User Story (user that interacts with a DDD system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified at first.
+ 
+  - Before developing any line of code, the behavior that the software should have for each case must be identified. The greatest amount of feedback from the users who will use the system (which are a fundamental part of this phase) must be taken into account, or, in the case of a new system, a consistent idea of ​​what is expected to be achieved, in order to define the specifications mentioned above.
+ 
+  - Only when all the 'user stories' and system flows have been covered, should one move on to the development phase. And the above takes time. Normally it would take approximately 70% of the time (and cost) of the project. (sadly... this is not usually the case, at least not in the country I live in).
+ 
+  - In DDD, the most important thing is the understanding, feedback and design of the stories that will be produced within the system. DDD is the design framework for a system based on its behavior, NOT based on the data models (entities) of the domain.
+  
+  - But the technical implementation of a DDD system is challenging, it has complexities that can make architects decide to use expensive frameworks and infrastructures that try to handle these complexities, or simply discard it and opt for the traditional (data model-based design) that, in the long run, turn out to be monolithic, difficult to scale, andconsiderably more expensive if it is explicitly required to obtain the features that a DDD system can provide by default... (A more detailed description of this last point will be left below).
+ 
+  - It is this last point that I try to address in this project.
 
-note 1: The first sketches and proofs of concepts were developed in Typescript/Python... now rewriting same things in Rust (just the functions) 
 
-note 2: Front-end servers aren´t considered on this project yet.. 
+..So, what offer a sistem designed like this that really pay the effort???
+  
+  - Traceability and Consistency: The most important point in terms of the value it can bring to the business. but Why? 
 
-note 3: The next proyect: To decopule from AWS, try the same goal with other lowcost cloud providers like Cloudflare or any other that a third world team can finance..
+  - Event Sourced: Allows reconstructing the system state of each "entity" (domain aggregate in DDD terms) from a sequence of inmutable events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the historical/operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces, information that can be really valuable for the business,  I mean... USER BEHAVIOR in:  
+    - Social networks 
+    - Online stores and marketplaces,
+    - Financial systems 
+    - Banking 
+    - IoT 
+    - Transport and logistics
+    - Videogames ... 
+    - etc, etc, etc... so, any big tech companies come to mind?
+    
+  - CQRS: Separates read and write operations, optimizing data performance and consistency.
+
+  - Decoupling: Separates the domain logic from the infrastructure, facilitating changes in the business without affecting the technological infrastructure.
+    
+  - Scalability and Resilience:
+  
+  - Stateless: Reduces the load on the server by not storing state between requests, allowing for greater scalability.
+      
+  - Event-Driven: Improves responsiveness and resilience by processing events avsynchronously.
+
+  - Maintainability: Promotes a more modular and maintainable architecture, where changes in one area of the system have a reduced impact on other areas.
 
 
-Objetive: 
-  - To achive the most simple and lowcost way to mount a Stateless, Event Driven, Event Sourced CQRS core service on AWS
+In comparison, traditional data model-based systems are super easy develop and implemet but, as they grow in terms of components, entities and volume of data, tend to be more monolithic, less flexible and can have difficulty scaling and adapting to rapid changes in the business.
+
+
+
+Basic composition of a Domain Aggregate have, at least: 
+
+  - A Command Handler with a Rules/Policies validator 
+  - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers
+  - An Event Store that save the events and notify this outside via an async/pub-sub API
+  - A Query handler that make posible do query to the Event Store (Dynamodb) and get states from one o more aggregate instances.
+  - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
+  - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
+  - An async api.
+
+
+Next, I will deviate a little from the theoretical framework and explain the objectives limited to this particular project, and then return to the theoretical framework so that the explanations revolve around the objectives of the project in a practical way, preventing this from becoming an indigestible papyrus.
+
+Techical Objetives: 
+
+  - To achive the most simple and lowcost way to mount a Stateless, Event Driven, Event Sourced CQRS Core System Services on AWS
   - Done by making three / four common (almost generics) decopuled Domain Aggregates that cover most common cases of interactions
   - Without using frameworks, just AWS CDK.
   - No CDK meta programing or templating magic.. Aggregate1 -> aggregate1stack.ts, Aggregate2 -> Copy/Paste and Modify ggregate1stack.ts, and so.
   - Main goal is build a starting point of an architecture that allows to implement Domain Driven Design in an a little easier way.
 
-Challenge stuffs (outside the obvious things):
-  - Keep it simple.
+Challenge stuffs (outside the obvious DDD things):
+  - Keep it simple. Keep it really simple.
   - Security layers / Authentication / Authorization.
-  - Outside async comunication via websockets (Graphql, Appsync on AWS) (to front-end servers / functions. Never directly to client sides apps)
-  - To reduce Coltdown Start times to the minimum possible... (currently using simplest rust functions..  minimal coldown start time)
+  - Minimal cooldown start times in a lambda environment (currently I am using simplest Rust functions... 20ms or less at cooldownm start time, it's crazy)
 
 Resources, tools and technical stuffs:
   - AWS CDK to declare and configure all resources (default typescript cdk version)
@@ -36,6 +116,9 @@ Resources, tools and technical stuffs:
   - Rust lambda runtimes to reduce Coltdown Start at minimal.
   - Shared Type schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle and compilation/build time (easy on Rust and Typescript).
 
+
+
+Let's return to the theoretical framework.
 
 Why Graphql as API ?
   - External systems (SSR web servers, for example) must communicate to this system in terms of asynchronous commands, (explicit orders of what needs to be done in the system), and in terms of asynchronous queries to request updated information from the system. Let's see an example to understand the problem:
@@ -76,21 +159,15 @@ So.. why Graphq and not an http api with webhooks?
   - If webhooks were to handle asynchronous communication, the client (server client) would need to repeatedly query the webhook until a result is obtained (redundancy, resource wastage) and would also need to consider the configuration of parameters such as the frequency for querying the webhooks and the corresponding timeouts.
   - ...So far, this is the best option I’ve found to achieve that result, but there might be better ones. So, before implementing the communication interfaces, I’ll need to research again, I think.
 
-Basic composition of a Domain Aggregate have, at least: 
 
-  - A Command Handler with a Rules/Policies validator 
-  - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers
-  - An Event Store that save the events and notify this outside via an async/pub-sub API
-  - A Query handler that make posible do query to the Event Store (Dynamodb) and get states from one o more aggregate instances.
-  - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
-  - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
-  - An async api.
+Let's see a simple flow of a Client - Server interaction
+Consider that the client is a front-end server (ssr) that interacts through a graphql api with the Core of the system.
 
 Pseudo Code:
 ```
  enum CommandHandlerResponse<T, E> {
       Success(T),
-      Error(E),
+       Error(E),
     }
 enum QueryHandlerResponse<T, E> {
       Some(T),
@@ -113,58 +190,10 @@ Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) )
 Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) ]
 ```
 
-.. well, it seems like a long and slow proccess... 
-.. meybe not :)
+.. well, it seems like a long and slow proccess just for a simple interaction... 
+.. I can say you that meybe not :)
 
-
-
-Theoretical framework:
-  - https://www.google.com/search?q=domain+driven+design&oq=domain+driven+design - "Domain Driven Design" ( DDD )
-  - https://www.youtube.com/watch?v=GzrZworHpIk  - Event Sourcing You are doing it wrong by David Schmitz""
-
-Then: Domain Driven Desing..
-  
-  - In the Domain Driven Design philosophy (and, paradoxically, in almost any software engineering project) the most important phase, in which more time should be invested, is the initial phase: Design and specifications.
-    
-  - Unless the project is being developed by an I+D team,or other one with developers without mastery of the technologies that are intended to be used, or by a team that, due to pressure from ambitious stakeholders and management who ignore how disastrous and expensive a project can become if it is started to be developed on the fly and without having a clear understanding of what the behaviors and flows are in order to design based on them, software engineers, front-end/back-end developers and analysts, together with the users of the future system (if there are any) must focus on understanding and obtaining as much feedback as possible in order to describe each interaction and flow of the system, possible errors, alternative flows, automated or periodic periodic tasks, edge cases, etc.
- 
-  - For each User Story (interaction with the system, called 'use cases' in other types of systems) the behavior, business rules, information flow, intervention of other users or systems in said flow must be identified.
- 
-  - Before developing any line of code, the behavior that the software should have for each case must be identified. The greatest amount of feedback from the users who will use the system (which are a fundamental part of this phase) must be taken into account, or, in the case of a new system, a consistent idea of ​​what is expected to be achieved, in order to define the specifications mentioned above.
- 
-  - Only when all the 'user stories' and system flows have been covered, should one move on to the development phase. And the above takes time. Normally it would take approximately 70% of the time (and cost) of the project. (sadly... this is not usually the case, at least not in the country I live in).
- 
-  - In DDD, the most important thing is the understanding, feedback and design of the stories that will be produced within the system. DDD is the design framework for a system based on its behavior, NOT based on the data models (entities) of the domain.
-  
-  - But the technical implementation of a DDD system is challenging, it has complexities that can make architects decide to use expensive frameworks and infrastructures that try to handle these complexities, or simply discard it and opt for the traditional (data model-based design) that, in the long run, turn out to be monolithic, difficult to scale, andconsiderably more expensive if it is explicitly required to obtain the features that a DDD system can provide by default... (A more detailed description of this last point will be left below).
- 
-  - It is this last point that I try to address in this project.
-
-
-..So, what offer a sistem designed like this that really pay the effort???
-  
-  - Traceability and Consistency: The most important point in terms of the value it can bring to the business. ..Why? 
-
-   - Event Sourced: Allows reconstructing the system state from a sequence of events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the  historical operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces (information that can be really valuable for the business). (... I mean, user behavior in social networks, online stores and marketplaces, financial systems, banking, IoT, logistics... practically everything.
-    
-  - CQRS: Separates read and write operations, optimizing data performance and consistency.
-
-  - Decoupling: Separates the domain logic from the infrastructure, facilitating changes in the business without affecting the technological infrastructure.
-    
-  - Scalability and Resilience:
-  
-  - Stateless: Reduces the load on the server by not storing state between requests, allowing for greater scalability.
-      
-  - Event-Driven: Improves responsiveness and resilience by processing events avsynchronously.
-
-  - Maintainability: Promotes a more modular and maintainable architecture, where changes in one area of the system have a reduced impact on other areas.
-
-
-In comparison, traditional data model-based systems are super easy develop and implemet but, as they grow in terms of components, entities and volume of data, tend to be more monolithic, less flexible and can have difficulty scaling and adapting to rapid changes in the business. 
-
-
-
-
+I'm currently writing more stuff, synthesizing some ideas, and will update this document as I can. The most interesting part comes when you realize the benefits it gives you in distributed systems... and the frequent data caching on the SSR side in the most efficient and simple way... I'm excited.
 
 
 

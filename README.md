@@ -56,7 +56,7 @@ Then.. Domain Driven Desing:
   - It is this last point that I try to address in this project.
 
 
-..So, what offer a sistem designed like this that really pay the effort???
+..So, what offer a system designed like this that really pay the effort???
   
   - Traceability and Consistency: The most important point in terms of the value it can bring to the business. but Why? 
 

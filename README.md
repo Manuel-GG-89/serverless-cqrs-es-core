@@ -173,7 +173,7 @@ So.. why Graphq and not an http api with webhooks?
 
 
 Let's see a simple flow of a Client - Server interaction. 
-Consider that the client is a front-end server (ssr) that interacts through a graphql api with the Core of the system asynchronously, without blocking the user's UI (perhaps using a feature like React's Suspense)
+Consider that the client is a front-end server (ssr) that interacts through a graphql api with the Core of the system asynchronously, without blocking the user's UI (perhaps using a feature like React Suspense or similar)
 
 Happy path of a generic event. Pseudo Code:
 ```

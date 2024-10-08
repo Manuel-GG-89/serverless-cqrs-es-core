@@ -92,7 +92,7 @@ A basic composition of a Domain Aggregate have, at least:
 
   - A Command Handler with a Rules/Policies validator that generate system events based on recived command that pass all the varidations and rules. 
   - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers, and notify this outside clients via an async/pub-sub API
-  - An Event-Store to save self events.
+  - An Event-Store to save self events. Techically, a NoSQL Database, or even just a json file. It will depends on each aggregate.
   - A set of Event-Stores to store events from other domains (aggregates) of interest required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the current state of other required entities is achieved by storing others aggregates events and replaying their state (folding) internally just as the other entity would do. There are exceptions, but generally speaking this is the norm.
   - A Query handler that make posible do query to the Event Store and get states from one o more (self) aggregate instances.
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.

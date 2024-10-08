@@ -185,7 +185,7 @@ enum QueryHandlerResponse<T, E> {
       Some(T),
       Error(E),
     }
-type commandParams = [..inputParams, maybe(ID)]  
+type commandParams = [..inputParams, maybe(ID)]  # maybe(ID) because createNewIntance commands have not id.
 
 Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
                         ↓                                                                     ↑

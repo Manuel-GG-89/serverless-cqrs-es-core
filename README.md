@@ -23,6 +23,9 @@ I highly recommend reading a bit about DDD and its technical aspects in terms of
 
 so, do some reserch to understand the basics:
   - https://www.google.com/search?q=domain+driven+design&oq=domain+driven+design - "Domain Driven Design" ( DDD )
+    
+  - https://www.google.cl/search?q=event+storming Events Storming: It is the way in which these systems are designed, starting with an understanding of the domain, its problems, flows, interactions, etc. And all you need is a big whiteboard and a lot of colored sticky notes. 
+
 
 Or just skip and go to the interesting things (implementation stuffs):
   - https://www.youtube.com/watch?v=GzrZworHpIk  - Event Sourcing You are doing it wrong by David Schmitz""

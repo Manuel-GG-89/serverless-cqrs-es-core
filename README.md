@@ -22,7 +22,7 @@ Theoretical framework:
 I highly recommend reading a bit about DDD and its technical aspects in terms of implementation before reading further. I even highly recommend having a conversation with your preferred AI Chat about this topic. There are things that it is better to know beforehand so that my explanations make sense, if I tried to explain them in detail one by one... this would become a papyrus.
 
 so, do some reserch to understand the basics:
-  - https://www.google.com/search?q=domain+driven+design&oq=domain+driven+design - "Domain Driven Design" ( DDD )
+  - https://www.google.com/search?q=domain+driven+design - "Domain Driven Design" ( DDD )
     
   - https://www.google.cl/search?q=event+storming Events Storming: It is the way in which these systems are designed, starting with an understanding of the domain, its problems, flows, interactions, etc. And all you need is a big whiteboard and a lot of colored sticky notes. 
 

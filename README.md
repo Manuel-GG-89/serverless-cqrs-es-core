@@ -191,7 +191,7 @@ Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onComma
                         ↓                                                                     ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
                         ↓                                                                     ↑
-Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated.aggregateInstance.ID) ] 
+Command_Handler[ validate_rules(commandParams) >> validateCommandRules(commandParams) >>  emmit_to_bus(newEventCreated) && responseWithID(newEventCreated.aggregateInstance.ID) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 
                         ↓

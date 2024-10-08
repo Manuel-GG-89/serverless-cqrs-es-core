@@ -17,6 +17,9 @@ This is about software design and architecture. This is about Domain Driven Desi
 *** IMPORTANT TAKE:  FRONT-END DEVELOPERS who have used React Redux or any other design pattern based on Redux… this is more or less the same but applied to the back-end context. So it might be easier for them to understand the essence and mechanisms described here ***
 
 
+*** ANOTHER TAKE: BACK-END Developers... You should not be intimidated by the Rust language. We are not low-level programmers. Our code is, in most cases, high-level code. Rust can be complex when used for low-level software, but we... we just write functions and make APIs. Rust's rules are easy to learn and respect by working with this language at a high level. They are easy to master if your way of programming is not based on OOP. If your code tends to be functional in general, and procedural in limited things, you should not have problems. But if your coding style is based on OOP, inheritance, state mutation... Better not use Rust, use any other language that you master in which OOP is the base paradigm (java, python, go, ryuby, php, c++, etc.) following the architectural patterns described here. The language does not matter. It's just that Rust... for this kind of stuff is easy, and you get NASA performance without much effort. Give it a try. ***
+
+
 Theoretical framework:
 
 I highly recommend reading a bit about DDD and its technical aspects in terms of implementation before reading further. I even highly recommend having a conversation with your preferred AI Chat about this topic. There are things that it is better to know beforehand so that my explanations make sense, if I tried to explain them in detail one by one... this would become a papyrus.

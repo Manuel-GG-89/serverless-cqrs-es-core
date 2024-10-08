@@ -86,7 +86,7 @@ A basic composition of a Domain Aggregate have, at least:
   - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers, and notify this outside clients via an async/pub-sub API
   - An Event-Store that save self events.
   - A set of Event-Stores that store events from otherdomains (aggregates) of interest required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the current state of other required entities is achieved by storing others aggregates events and replaying their state (folding) internally just as the other entity would do. There are exceptions, but generally speaking this is the norm.
-  - A Query handler that make posible do query to the Event Store (Dynamodb) and get states from one o more aggregate instances.
+  - A Query handler that make posible do query to the Event Store and get states from one o more (self) aggregate instances.
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
   - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.
   - An async api.

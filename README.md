@@ -199,7 +199,7 @@ Event_Handler[ capture_and_store(newEventCreated) >> rebuild_new_aggregate_insta
                         ↓
 Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newAggregateInsanceState)) ) ]
                         ↓
-Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
+Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  cachOrUpdatAggregateInstanceProjectionAndAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
 ```
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 

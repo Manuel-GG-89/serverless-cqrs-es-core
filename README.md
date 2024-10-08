@@ -191,15 +191,15 @@ Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onComma
                         ↓                                                                     ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
                         ↓                                                                     ↑
-Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated) ] 
+Command_Handler[ validate_rules(commandParams) >> emmit_to_bus(newEventCreated) && responseWithID(newEventCreated.ID) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 
                         ↓
-Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newEventCreated)) ] 
+Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregateEventEmited(newAggregateInsanceState)) ] 
                         ↓
-Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
+Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newAggregateInsanceState)) ) ]
                         ↓
-Client[ >..waiting..> onQueryByIdResponds(Some(newEventCreated)) >>  cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) && sendToUserUI(newEventCreated) ]
+Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInsanceState)) >>  cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
 ```
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 

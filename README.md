@@ -209,7 +209,7 @@ Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendTo
 
 Considerations in front-end/back-end, communication, components and eventual consistency:
 
-Note: The front-end is not my domain field. Nowadays it is an extensive field, it evolves very quickly and the main complexity is learning how to deal with it, it requires dedication, passion, creativity and good taste. Finding the best alternative that adapts to each project is not easy since it requires experience that I do not have, it is not within my current knowledge and capacity. However, there are some minimum considerations that must be taken on front-end/back-end servers when interacting with any system of this type (event-driven system, not mutation-driven system).
+Note: The front-end is not my domain field. Nowadays it is an extensive field, it evolves very quickly and the main complexity is learning how to deal with it, it requires dedication, passion, creativity and good taste. Finding the best alternative that adapts to each project is not easy since it requires experience that I do not have, it is not within my current knowledge and capacity. However, there are some minimum considerations that must be taken on front-end/back-end servers when interacting with any system of this type (event-driven system, without mutations).
 
 To recap: 
 

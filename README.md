@@ -55,7 +55,7 @@ Then.. Domain Driven Desing:
   
   - Traceability and Consistency: The most important point in terms of the value it can bring to the business. but Why? 
 
-  - Event Sourced: Allows reconstructing the system state of each "entity" (domain aggregate in DDD terms) from a sequence of inmutable events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the historical/operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces, information that can be really valuable for the business,  I mean... USER BEHAVIOR in:  
+  - Event Sourced: Allows reconstructing the system state of each "entity" (domain aggregate in DDD terms) from a sequence of inmutable events, providing greater traceability by default. You do not need to generate any kind of procedure by consulting logs obtained from a relational database (if there were enough of them) and try to reconstructfrom those the historical/operational traces of key system entities when it becomes necessary to generate statistical analyses and projections based on those traces, information that can be really valuable for the business,  I mean... USER BEHAVIOR or any entity behavior in:  
     - Social networks 
     - Online stores and marketplaces,
     - Financial systems 

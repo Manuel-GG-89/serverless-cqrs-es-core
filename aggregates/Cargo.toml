@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "shared_library",
+
+    # Order Domain Aggregate
+    "cores/order_core",
+    "handlers/order/commands_handler",
+    "handlers/order/events_handler",
+    "handlers/order/querys_handler",
+    
+    # Reservation Domain Aggregate
+    "cores/reservation_core",
+    "handlers/order/commands_handler",
+    "handlers/order/events_handler",
+    "handlers/order/querys_handler", "cores/order_core",
+]

@@ -1,0 +1,30 @@
+[package]
+name = "commands_handler"
+version = "0.1.0"
+edition = "2021"
+
+# Starting in Rust 1.62 you can use `cargo add` to add dependencies 
+# to your project.
+#
+# If you're using an older Rust version,
+# download cargo-edit(https://github.com/killercup/cargo-edit#installation) 
+# to install the `add` subcommand.
+#
+# Running `cargo add DEPENDENCY_NAME` will
+# add the latest version of a dependency to the list,
+# and it will keep the alphabetic ordering for you.
+
+[dependencies]
+
+aws-config = { version = "1.1.7", features = ["behavior-version-latest"] }
+tokio = { version = "1", features = ["macros"] }
+lambda_runtime = "0.13.0"
+serde = "1"
+serde_derive = "1.0"
+serde_json = "1.0"
+chrono = "0.4.38"
+aws-sdk-eventbridge = "1.36.0"
+aws-sdk-dynamodb = "1.39.0"
+shared_library = { path = "../../../shared_library/" }
+order_core = { path = "../../../cores/order_core" }
+

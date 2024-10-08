@@ -1,20 +1,16 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as path from 'path';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as appsync from 'aws-cdk-lib/aws-appsync'; 
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import { parse, ObjectTypeDefinitionNode, InputObjectTypeDefinitionNode } from 'graphql';
 import * as fs from 'fs';
 import { AttributeType, ProjectionType } from 'aws-cdk-lib/aws-dynamodb';
 import { RustFunction } from 'cargo-lambda-cdk';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import { BlockPublicAccess } from 'aws-cdk-lib/aws-s3';
 
 
-export class OrderAggregateStack extends cdk.Stack {
+export class ReservationAggregateStack extends cdk.Stack {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
@@ -23,16 +19,16 @@ export class OrderAggregateStack extends cdk.Stack {
   */
 
   // Funcion para manejar los comandos del agregado
-  const commandHandlerFunction = new RustFunction(this, 'order_command_handler', {
-      manifestPath: path.join(__dirname, '..', 'aggregates', 'handlers', 'order', 'command_handler'),
-      functionName: 'order-command-handler',
+  const commandHandlerFunction = new RustFunction(this, 'reservation_command_handler', {
+      manifestPath: path.join(__dirname, '..', 'aggregates', 'handlers', 'reservation', 'command_handler'),
+      functionName: 'reservation-command-handler',
     });
 
 
   // Funcion para manejar los eventos del agregado
-  const eventHandlerFunction = new RustFunction(this, 'order_event_handler', {
-    manifestPath: path.join(__dirname, '..', 'aggregates', 'handlers', 'order', 'event_handler'),
-    functionName: 'order-event-handler',
+  const eventHandlerFunction = new RustFunction(this, 'reservation_event_handler', {
+    manifestPath: path.join(__dirname, '..', 'aggregates', 'handlers', 'reservation', 'event_handler'),
+    functionName: 'reservation-event-handler',
   });
 
   // Obtiene el bus de eventos por defecto de EventBridge
@@ -45,7 +41,7 @@ export class OrderAggregateStack extends cdk.Stack {
   }));
 
   // crea una tabla DynamoDb para almacenar los eventos
-  const eventStoreTableName = "order-eventstore";
+  const eventStoreTableName = "reservation-eventstore";
   const eventStoreTable = new cdk.aws_dynamodb.Table(this, eventStoreTableName, {
     tableName: eventStoreTableName,
     partitionKey: { name: 'id', type: cdk.aws_dynamodb.AttributeType.STRING },
@@ -61,17 +57,17 @@ export class OrderAggregateStack extends cdk.Stack {
     projectionType: ProjectionType.KEYS_ONLY,
   });
 
-  // Permitir que event handler function pueda insertar items en order-eventstore
+  // Permitir que event handler function pueda insertar items en reservation-eventstore
   eventStoreTable.grantWriteData(eventHandlerFunction);
 
-  // Permitir que command handler function pueda leer items en order-eventstore
+  // Permitir que command handler function pueda leer items en reservation-eventstore
   eventStoreTable.grantReadData(commandHandlerFunction);
 
-  // Permitir que query handler function pueda leer items en order-eventstore
+  // Permitir que query handler function pueda leer items en reservation-eventstore
   const  eventBusDeliveryRules = require(path.join(__dirname, '/eventbus_delivery_rules.ts')).ORDER_DELIVERY_RULES;
 
   // Crear una regla en EventBridge para el agregado de dominio y enviar todos los eventos a la función eventHandlerFunction
-  const deliveryRuleName = 'Send_all_Order_events_to_event-handler';
+  const deliveryRuleName = 'Send_all_Reservation_events_to_event-handler';
   const rule = new events.Rule(this, deliveryRuleName, {
     ruleName: deliveryRuleName,
     eventPattern: eventBusDeliveryRules,

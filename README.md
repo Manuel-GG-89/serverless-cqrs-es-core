@@ -98,7 +98,7 @@ A basic composition of a Domain Aggregate have, at least:
   - An Event-Store to save self events. Techically, a NoSQL Database, or even just a json file. It will depends on each aggregate.
   - A set of Event-Stores to store events from other domains aggregates of interest required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the get the current state of other required entities is achieved by storing events of those aggregaters internally (inside) and replaying (folding) them,  just as the other entity would do. There may be exceptions, but generally speaking this is the norm.
   - A Query handler that make posible do query to the Event Store and get states from one o more (self) aggregate instances.
-  - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
+  - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of an agregate instance reading the (historical) events form the event-store.
   - A set of delivery rules (configured on the event bus) to indicate the destinations of each event generated. Just a simple pointer to self and others aggreagtes that interested on the aggregate events generated. It can be described in the opposite way, a rule stating which aggregate events from other aggregates it will need, or in a more general way, which other domain aggregates it needs to receive all of its events from.
   - An async api.
 

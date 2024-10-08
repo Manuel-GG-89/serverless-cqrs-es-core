@@ -175,7 +175,7 @@ So.. why Graphq and not an http api with webhooks?
 Let's see a simple flow of a Client - Server interaction
 Consider that the client is a front-end server (ssr) that interacts through a graphql api with the Core of the system.
 
-Pseudo Code:
+Happy path of a generic event. Pseudo Code:
 ```
  enum CommandHandlerResponse<T, E> {
       Success(T),

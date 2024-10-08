@@ -14,7 +14,7 @@ This is about software design and architecture. This is about Domain Driven Desi
 
 - note 3: For now, this project is intended to be deployed on AWS just for convenience, but with a little creativity, you can set it up entirely on-premises, or on a monolithic Linux server. In that case, you would have to implement by yourself an event bus that allows setting up simple distribution rules, a non-relational database (even json documents would work, it depends on each system), and an asynchronous API that allows connections via websocket and pub-sub communication model (I recommend Grapql).
 
-
+*** IMPORTANT TAKE:  FRONT-END DEVELOPERS who have used React Redux or any other design pattern based on Redux… this is more or less the same but applied to the back-end context. So it might be easier for them to understand the essence and mechanisms described here ***
 
 
 Theoretical framework:
@@ -32,7 +32,7 @@ Or just skip and go to the interesting things (implementation stuffs):
 
 And talk with your AI Chat bot about DDD and how that matches in terms of implementation with Stateless, Event Driven, Event Sourced CQRS architectures.
 
-*** IMPORTANT TAKE:  FRONT-END DEVELOPERS who have used React Redux or any other design pattern based on Redux… this is more or less the same but applied to the back-end context. So it might be easier for them to understand the essence and mechanisms described here ***
+
 
 
 Then.. Domain Driven Desing:

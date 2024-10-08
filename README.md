@@ -78,12 +78,14 @@ Then.. Domain Driven Desing:
 In comparison, traditional data model-based systems are super easy develop and implemet but, as they grow in terms of components, entities and volume of data, tend to be more monolithic, less flexible and can have difficulty scaling and adapting to rapid changes in the business.
 
 
+So, if You already reads some basic concepts of DDD, You may have noticed that a domain aggregate is, in practical terms that we already know, like a "Micro-Service" in terms of a traditional decentralized system that represents only one entity in a domain composed of several entities. 
 
-Basic composition of a Domain Aggregate have, at least: 
+A basic composition of a Domain Aggregate have, at least: 
 
   - A Command Handler with a Rules/Policies validator 
   - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers
-  - An Event Store that save the events and notify this outside via an async/pub-sub API
+  - An Event-Store that save self events and notify this outside clients via an async/pub-sub API
+  - A set of Event-Stores that store events from otherdomains (aggregates) of interest required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the current state of other required entities is achieved by storing others aggregates events and replaying their state (folding) internally just as the other entity would do. There are exceptions, but generally speaking this is the norm.
   - A Query handler that make posible do query to the Event Store (Dynamodb) and get states from one o more aggregate instances.
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of the agregate reading the (historical) events form the event-store.
   - A set of delivery rules (configured on the event bus) to indicate the destinations of each event.

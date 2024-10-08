@@ -199,7 +199,7 @@ Event_Handler[ capture_and_store(newEventCreated) >> publish_to_api( onAggregate
                         ↓
 Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newEventCreated)) ) ]
                         ↓
-Client[ >..waiting..> queryAggerateByIdAndWait(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) ]
+Client[ >..waiting..> onQueryByIdResponds(Some(newEventCreated)) >>  sendToUserUI( Some(newEventCreated) ) && cachOrUpdateAggrProjectionOrAnyOtherSSRprocess(newEventCreated) ]
 ```
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 

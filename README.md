@@ -1,5 +1,22 @@
 This is only a proof of concept at a very early stage. A technical attempt to demystify and do something that has already been done for a long time behind the scenes by large tech companies to "solve large scale problems" (...or creating large scale problems?...)  in different industries: financial, logistics, marketing, video games, IoT, Robotics, AI, etc, etc., but taken to terms that it is possible for me, as an average engineer with a very poor education and limited resources, to implement. It is a set of technical proposals and knowledge still under development that I have worked on for many years based on problems that I have faced in the corporate environment and I have had to solve by brute force... in companies that prefer to extend malformed projects for year... and waste lot of money trying to implement ineffective, inefficient, costly, based on patches and tricks, obsolete solutions...  and how this type of philosophy in software design can contribute immensely outside the context of large tech companies.  
 
+*** 
+
+Clarification: Capturing telemetry data and tracking user behavior is not why these software design patterns were created. Can they be used for that? Of course, but that's not the goal. This type of decentralized software design arose from the need to create systems in which their domain entities function truly decoupled, both in their application layer and in their data layer. It is an answer to solve the problems (inconsistencies?) presented by decentralized software architectures based on microservices, where its application layer is decoupled, but its data layer is not... where, in the end, each microservice that needs data from another entity in the domain must make a request to said entity to obtain the states of its instances, or its databases are shared... which makes all the paraphernalia to decentralize the software in microservices become a sin sense. Furthermore, many domains, by definition and nature (and in many cases, because the law establishes it), need to be stored as a succession of immutable events. 
+
+For example, in banking and financial systems, at least where I live, by law the minutes of movements and transactions carried out must be kept as immutable events. 
+Another example: The operations carried out in the judicial system, by law, must also be saved as a succession of immutable events. 
+Another example: In passenger transport systems, by their nature, they are also stored as a succession of immutable events (GPS and sensors).
+Another example: Many video games, online or offline, especially sports and competitive ones, store games in the form of a succession of events. For many years, even before the internet was popular, soccer games, racing games, shooters, and many others, were (and are) able to completely reproduce each game, in fact, you can save it and view it later. How do they achieve this? because the core of their systems saves each state change as a sequence of events by default. Have you ever played Fortnite? You can completely replay the game when you finish it... and it is not stored by saving the rendered data... since each change of state in the video game is an event, and its history is a succession of events, these can be replayed later and there is no additional cost in the video game engine to do so, since in essence, the ram memory also records each change of state of the video game as a succession of events that from time to time is dumped into a cache file (to free up memory), thus which finally achieves a complete record of each action of the game. This is why many video games are capable of replaying games in their entirety after finishing playing them, or even before having finished playing them... In football video games and other sports, at any time during the game you can pause and check the replay back. .
+There are hundreds of cases where this paradigm is not an option, but rather an intrinsic requirement of the domain.
+
+
+Was generative artificial intelligence created in order to maximize the economic benefits of the companies that finance its development?? I think not, but the reality is that this technology allows it. It depends on each person and entity what use is given to said technology.
+
+ ***
+
+
+
 well ..
 
 This is about software design and architecture. This is about Domain Driven Design... and how to design systems that perceive, interpret, process, interact and remember changes in ourselves and the environment in the way our mind (currently) does... as a succession of immutable events over time that modify our own state and that of the world around us.
@@ -61,20 +78,6 @@ Then.. Domain Driven Desing:
 
 
 ..So, what offer a system designed like this that really pay the effort???
-
-*** 
-Clarification: Capturing telemetry data and tracking user behavior is not why these software design patterns were created. Can they be used for that? Of course, but that's not the goal. This type of decentralized software design arose from the need to create systems in which their domain entities function truly decoupled, both in their application layer and in their data layer. It is an answer to solve the problems (inconsistencies?) presented by decentralized software architectures based on microservices, where its application layer is decoupled, but its data layer is not... where, in the end, each microservice that needs data from another entity in the domain must make a request to said entity to obtain the states of its instances, or its databases are shared... which makes all the paraphernalia to decentralize the software in microservices become a sin sense. Furthermore, many domains, by definition and nature (and in many cases, because the law establishes it), need to be stored as a succession of immutable events. 
-
-For example, in banking and financial systems, at least where I live, by law the minutes of movements and transactions carried out must be kept as immutable events. 
-Another example: The operations carried out in the judicial system, by law, must also be saved as a succession of immutable events. 
-Another example: In passenger transport systems, by their nature, they are also stored as a succession of immutable events (GPS and sensors).
-Another example: Many video games, online or offline, especially sports and competitive ones, store games in the form of a succession of events. For many years, even before the internet was popular, soccer games, racing games, shooters, and many others, were (and are) able to completely reproduce each game, in fact, you can save it and view it later. How do they achieve this? because the core of their systems saves each state change as a sequence of events by default. Have you ever played Fortnite? You can completely replay the game when you finish it... and it is not stored by saving the rendered data... since each change of state in the video game is an event, and its history is a succession of events, these can be replayed later and there is no additional cost in the video game engine to do so, since in essence, the ram memory also records each change of state of the video game as a succession of events that from time to time is dumped into a cache file (to free up memory), thus which finally achieves a complete record of each action of the game. This is why many video games are capable of replaying games in their entirety after finishing playing them, or even before having finished playing them... In football video games and other sports, at any time during the game you can pause and check the replay back. .
-There are hundreds of cases where this paradigm is not an option, but rather an intrinsic requirement of the domain.
-
-
-Was generative artificial intelligence created in order to maximize the economic benefits of the companies that finance its development?? I think not, but the reality is that this technology allows it. It depends on each person and entity what use is given to said technology.
- ***
-
 
   
   - Traceability and Consistency: The most important point in terms of the value it can bring to the business. but Why? 

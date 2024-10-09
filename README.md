@@ -127,15 +127,21 @@ In comparison, traditional data model-based systems are super easy develop and i
 
 So, if You already reads some basic concepts of DDD, You may have noticed that a domain aggregate is, in practical terms that we already know, like a "Micro-Service" in terms of a traditional decentralized system that represents only one entity in a domain composed of several entities. 
 
-A basic composition of a Domain Aggregate have, at least: 
+In this type of systems, communication between each domain aggregate occurs through a globally accessible event bus. Depending on the nature of the domain and the concurrent load it must support, you can configure 1 global bus that will receive and distribute all system events regardless of the domain aggregate to which they belong, or you can also configure it in a granular way, that is, one event bus for each domain aggregate or a set of buses that manage events for groups of domain aggregates. 
+
+Everything will depend on the characteristics and load that each domain aggregate or group of domain aggregates requires (... I think that laptops, PCs, smartphones, consoles and servers, at the hardware level, also work that way).
+
+It should be noted that, in this case, it is recommended that the event bus be the one that has the event distribution rules, since it is easier to manage and is visible to everyone at a general level.
+
+Taking all of the above into consideration, a basic composition of a Domain Aggregate have, at least: 
 
   - A Command Handler with a Rules/Policies validator that generate system events based on recived command that pass all the varidations and rules. 
-  - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers, and notify this outside clients via an async/pub-sub API
+  - A set of delivery rules (configured on the event bus) to indicate required events. Just a self pointer (to catch all self events) and a reference to others (some or the entire set) domain aggregate events that will be needed in the self context to achieve his tasks.
+  - An Event Handler that just save (in a event store) the  emited events from (self and/or external) Commands Handlers, and notify this outside clients via an async/pub-sub API.
   - An Event-Store to save self events. Techically, a NoSQL Database, or even just a json file. It will depends on each aggregate.
-  - A set of Event-Stores to store events from other domains aggregates of interest required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the get the current state of other required entities is achieved by storing events of those aggregaters internally (inside) and replaying (folding) them,  just as the other entity would do. There may be exceptions, but generally speaking this is the norm.
+  - A set of Event-Stores to save events from other domains aggregates of interest, required to execute internal procedures. There are no calls to other entities (aggregates) in the domain, the get the current state of other required entities is achieved by storing events of those aggregaters internally (inside) and replaying (folding) them,  just as the other entity would do. There may be exceptions, but generally speaking this is the norm.
   - A Query handler that make posible do query to the Event Store and get states from one o more (self) aggregate instances.
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of an agregate instance reading the (historical) events form the event-store.
-  - A set of delivery rules (configured on the event bus) to indicate the destinations of each event generated. Just a simple pointer to self and others aggreagtes that interested on the aggregate events generated. It can be described in the opposite way, a rule stating which aggregate events from other aggregates it will need, or in a more general way, which other domain aggregates it needs to receive all of its events from.
   - An async api.
 
 

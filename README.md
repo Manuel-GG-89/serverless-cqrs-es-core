@@ -168,7 +168,7 @@ Resources, tools and technical stuffs:
   - Internal communication through EventBridge data bus (not sqs/sns pub-sub pattern, delivery rules configured on the bus)
   - Step functions in case needs to handle transactions (saga pattern) (flow nor even designed yet ...)
   - No relational database. Just Dynamodb as an events store (historical events, no mutatios)
-  - No http/rest apis, no webhooks. Graphql (Appsync) acting like pub-sub midleware to expose allowed commands and querys (async operations) from each domain aggregate to front-end servers
+  - No http/rest apis, no webhooks or callbacks. Graphql (Appsync) acting like pub-sub midleware to expose allowed commands and querys (async operations) from each domain aggregate to front-end servers
   - Rust lambda runtimes to reduce cooldown start at minimal.
   - Shared Type schemmas between Domain Aggregates for Commands, Events and Querys when necesary at dev cycle and compilation/build time (easy on Rust and Typescript).
 
@@ -215,11 +215,12 @@ Why Graphql as API ?
     
 
   
-So.. why Graphq and not an http api with webhooks?
+So.. why Graphq and not an http api with webhooks or callbacks?
   - Easy implementation of a sub-pub communication model.
   - Default asynchronous communication
   - Websockets under the hood, which provides more security, speed, and reduces the number of connections and redundant requests.
   - If webhooks were to handle asynchronous communication, the client (server client) would need to repeatedly query the webhook until a result is obtained (redundancy, resource wastage) and would also need to consider the configuration of parameters such as the frequency for querying the webhooks and the corresponding timeouts.
+  - And callbacks.... well, callback hell? I dont even know...
   - ...So far, this is the best option I’ve found to achieve that result, but there might be better ones. So, before implementing the communication interfaces, I’ll need to research again, I think.
 
 

@@ -192,7 +192,7 @@ Why Graphql as API ?
 
 - The SSR has two options: Block the user's UI (the dumb option), OR take for granted that, as the command was already approved, at some point the response with the status of the updated aggregate instance will arrive, and use a tentative strategy... which is to show the user the already updated content with a small warning that the final response is still being processed in the server.... This sounds like React Suspense API to me :). The user's UI is not blocked, and the user can continue doing other things. But if for some internal reason the event does not propagate (timeout) or if an error message is received, then the user is notified that there was an system error processing the aproved command request and that he will have to generate it again (a popup notification or something similar). Let's take a closer look:
 
-*** As far as I know, grapql apis do not have default timeouts, or these are very long because the technology on which it is based (websocket) does not have default timeouts. However, there are several strategies to generate client-side timeouts, including dynamic timeouts for each type of command that can be reported by the response of the command handler. 
+*** As far as I know, grapql apis do not have default timeouts, or these are very long because the technology on which it is based (websocket) does not have default timeouts. However, there are several strategies to generate client-side timeouts, including dynamic timeouts for each type of command that can be reported by the response of the command handler. ***
   
   - The graphql aggregate endpoint sends to the aggregate Command-handler component the command (request), and it will not respond immediately since the request, before generating any change in the system, must be validated in terms of business rules, generate and distribute internally an event if the request passed all business rules, or respond immediately with an error if the business rules validation failed through the same request. This operation introduces two cases:
 
@@ -239,9 +239,9 @@ enum QueryHandlerResponse<T, E> {
 type commandParams = [..inputParams, maybe(ID)]  # maybe(ID) because createNewIntance commands have not id.
 
 Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
-                        ↓                                                                     ↑
+                        ↓                                                              ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
-                        ↓                                                                     ↑
+                        ↓                                                              ↑
 Command_Handler[ validate_rules(commandParams) >>  emmit_to_bus(newEventCreated) && respond_to_api_with_ID(newEventCreated.aggregateInstance.ID) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 

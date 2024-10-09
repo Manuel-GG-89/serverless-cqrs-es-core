@@ -10,7 +10,7 @@ For example, in banking and financial systems, at least where I live, by law the
 
 Another example: The operations carried out in the judicial system, by law, must also be saved as a succession of immutable events. 
 
-Another example: In passenger transport domain, by their nature, each signal recived from a bus, train, aeroplane, and any other, they are also stored as a succession of immutable events (GPS and sensors signals).
+Another example: In passenger transport domain, by their nature, each signal recived from a bus, train, aeroplane, and any other, they are also stored as a succession of immutable events (GPS and sensors signals). And the pay system saves historical events eny time that you arrives and uses it.
 
 Another example: Many video games, online or offline, especially sports and competitive ones, store the match in the form of a succession of events. For many years, even before the internet was popular, soccer videogames, racing videogames, shooters, and many others, were (and are) able to completely reproduce the entire match, in fact, you can save it and view it later. How do they achieve this? because the core of their systems saves each state change as a sequence of events by default. 
 

@@ -21,6 +21,7 @@ Even in Play Station 1, Winning Eleven (a Classic, Anthological soccer video gam
 This doesn't apply to all video games, but it's a common strategy applied to competitive video games.
 
 There are hundreds of cases where this paradigm is not an option, but rather an intrinsic requirement of the domain.
+
 Was generative artificial intelligence created in order to maximize the economic benefits of the companies that finance its development?? I think not, but the reality is that this technology allows it. It depends on each person and entity what use is given to said technology.
 
 

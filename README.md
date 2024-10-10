@@ -121,7 +121,7 @@ Then.. Domain Driven Desing:
     
   - Scalability and Resilience:
   
-  - Stateless: Reduces the load on the server by not keep states in session's memory between requests, allowing for greater scalability (state changes are stores has domine events).
+  - Stateless: Reduces the load on the server by not keep states in session's memory between requests, allowing for greater scalability (state changes are stored has domine events).
       
   - Event-Driven: Improves responsiveness and resilience by processing events avsynchronously.
 

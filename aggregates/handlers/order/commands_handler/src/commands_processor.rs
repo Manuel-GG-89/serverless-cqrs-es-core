@@ -3,7 +3,7 @@ use lambda_runtime::{tracing, Error};
 use order_core::entities::Order;
 use order_core::entities::OrderStatus;
 use order_core::event_types::OrderCreated;
-use shared_library::appsync_event_structure::*;
+use shared_library::appsync_structs::*;
 use super::commands::*;
 use super::commands_business_rules::*;
 use chrono::Utc; 

@@ -1,7 +1,7 @@
 use serde_derive::{Deserialize, Serialize};
 use super::entities::OrderStatus;
 
-// Crea un comando para manejar la creación de una orden
+// Crea un evento OrderCreated
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderCreated {
@@ -15,7 +15,7 @@ pub struct OrderCreated {
     pub order_status: OrderStatus,
 }
 
-// Crea un comando para manejar el cambio de estado de una orden
+// Crea un evento OrderStatusChanged
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderStatusChanged {

@@ -5,7 +5,7 @@ use aws_config::meta::region::RegionProviderChain;
 use lambda_runtime::tracing;
 use serde_json::{Error, Value};
 
-pub mod appsync_event_structure;
+pub mod appsync_structs;
 pub mod event_emitter;
 pub mod current_state;
 

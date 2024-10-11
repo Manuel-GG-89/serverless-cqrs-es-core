@@ -1,5 +1,9 @@
 This is only a proof of concept at a very early stage. A technical attempt to demystify and do something that has already been done for a long time behind the scenes by large tech companies to "solve large scale problems" (...or creating large scale problems?...)  in different industries: financial, logistics, marketing, video games, IoT, Robotics, AI, etc, etc., but taken to terms that it is possible for me, as an average engineer with a very poor education and limited resources, to implement. It is a set of technical proposals and knowledge still under development that I have worked on for many years based on problems that I have faced in the corporate environment and I have had to solve by brute force... in companies that prefer to extend malformed projects for year... and waste lot of money trying to implement ineffective, inefficient, costly, based on patches and tricks, obsolete solutions...  and how this type of philosophy in software design can contribute immensely outside the context of large tech companies.  
 
+
+*** 
+This README file is under construction and has constant changes, sometimes they are just spelling corrections, but others are incoporation or correction of ideas. Please check. 
+
 *** 
 WARNING: FRONT-END engineers and  developers, unless you only need to serve static websites with very little interaction and no user authentication/authorization, I recommend you DO NOT USE SERVERLESS ENVIRONMENTS ON YOUR SSR BASED APPLICATIONS.
 
@@ -8,10 +12,6 @@ There is no secure way to handle server-browser sessions in ephemeral environmen
 The best option at the moment is to use stateful servers (node/deno ​​servers, for example) with several nodes if it is really necessary, and good cache management. If the pattern described here is implemented correctly in the back-end (even-drive, event-sourced, cqrs), you can take advantage of the benefits of it  by caching all the responses from the backend (updated projections) without any complexities, and use them like a first source of data before querying the server.
 
 ***
-
-This README file is under construction and has constant changes, sometimes they are just spelling corrections, but others are incoporation or correction of ideas. Please check. 
-
-*** 
 
 CLARIFICATION: Capturing telemetry data and tracking user behavior is not why this software design patterns were created. Can they be used for that? Of course, but that's not the goal. This type of decentralized software design arose from the need to create systems in which their domain entities operates truly decoupled, both in their application layer and in their data layer. It is an answer to solve the problems (inconsistencies?) presented by decentralized software architectures based on microservices, where its application layer is decoupled, but its data layer is not... where, in the end, each microservice that needs data from another entity in the domain must make a request to said entity to obtain the states of its instances, or its databases are shared... which makes all the paraphernalia to decentralize the software in microservices become a non sense. 
 

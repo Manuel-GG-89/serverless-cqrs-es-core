@@ -265,11 +265,12 @@ Consider that the 'client' is a front-end server (ssr) that interacts through a 
 Happy path of a generic client-server domain aggregate flow. An SSR server (the 'client') send a command to an aggregate (the 'server') through their grapql api. 
 Pseudo Code:
 ```
-# Proccess: create new instance of a (generic) domain aggregate
-# Each container is a phisical (or virtual) component, 
+# Proccess: create or modify an instance of a (generic) domain aggregate by send a command.
+# Each container is a phisical (or virtual) component: 
 # Client is an SSR server, 
 # Event Bus is the internal-global (at back-end level) comunication channel, 
 # The other ones are part of a domain aggregate (lambda functions).
+
 # We need types that reprecent the responses in a functional way (since lambdas are functions):
 
 enum CommandHandlerResponse<T, E> {
@@ -289,9 +290,10 @@ enum QueryHandlerResponse<T, E> {
 # So:
 
 type aggProjectionID = Maybe({ID, version}) 
+
 type commandParams = [...inputParams, aggProjectionID] 
 
-# pseudo flow:
+# then (pseudo code flow):
 
 Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(aggProjectionID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
                         ↓                                                              ↑

@@ -5,11 +5,16 @@ This is only a proof of concept at a very early stage. A technical attempt to de
 This README file is under construction and has constant changes, sometimes they are just spelling corrections, but others are incoporation or correction of ideas. Please check. 
 
 *** 
-WARNING: FRONT-END engineers and  developers, unless you only need to serve static websites with very little interaction and no user authentication/authorization, I recommend you DO NOT USE SERVERLESS ENVIRONMENTS ON YOUR SSR BASED APPLICATIONS.
+
+UPDATE: I think I made a mistake in this warning. I have been doing some research and it is possible that there are ways to use ephemeral environments on SSR servers, but I need to try and test. Please do not consider the following warning until you have, it could be wrong.
+
+~~  WARNING: FRONT-END engineers and  developers, unless you only need to serve static websites with very little interaction and no user authentication/authorization, I recommend you DO NOT USE SERVERLESS ENVIRONMENTS ON YOUR SSR BASED APPLICATIONS.
+
+
 
 There is no secure way to handle server-browser sessions in ephemeral environments, and there are no truly effective strategies to manage cache in such environments. You will only end up with applications that will be slow to load, and (unless the serverless environments that brings up the App is always ON... like any webserver) you will not get any benefit. It's not worth it, even with a PHP server you would get better performance and security. 
 
-The best option at the moment is to use stateful servers (node/deno ​​servers, for example) with several nodes if it is really necessary, and good cache management. If the pattern described here is implemented correctly in the back-end (even-drive, event-sourced, cqrs), you can take advantage of the benefits of it  by caching all the responses from the backend (updated projections) without any complexities, and use them like a first source of data before querying the server.
+The best option at the moment is to use stateful servers (node/deno ​​servers, for example) with several nodes if it is really necessary, and good cache management. If the pattern described here is implemented correctly in the back-end (even-drive, event-sourced, cqrs), you can take advantage of the benefits of it  by caching all the responses from the backend (updated projections) without any complexities, and use them like a first source of data before querying the server. ~~
 
 ***
 

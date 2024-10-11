@@ -285,7 +285,7 @@ enum QueryHandlerResponse<T, E> {
 # At basic level, the aggregate projection ID (the current state of a domain aggregate instance)
 # is composed by the ID of the instance plus the version (serial number) of the projection.
 # The version change every time that a new event is generated for that aggregate instance (is a correlative number) 
-# This composition is 'Maybe' (maybe type) because 'createNewIntance' commands have not id and version of an aggregate yet.
+# This composition is 'Maybe' (maybe type) because 'createNewIntance' commands have not id and version yet.
 # So:
 
 type aggProjectionID = Maybe({ID, version}) 

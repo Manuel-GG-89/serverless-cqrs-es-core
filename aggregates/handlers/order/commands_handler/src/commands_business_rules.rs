@@ -2,6 +2,10 @@ use lambda_runtime::{tracing, Error};
 use order_core::entities::Order;
 use super::commands::EnabledCommand;
 
+
+### Las reglas de negocio fueron de aca, a nivel de codigo, solo para crear el motor de procesamiento.
+### TODO: Eventualmente, este componente debiese obtener las reglas desde un documento DSL (json, yaml, xml, otro) 
+
 pub async fn ejecutar_reglas(command: &EnabledCommand, current_state: &Order) -> Result<(), Error> {
     match command {
         EnabledCommand::CreateOrder(_) => {

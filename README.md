@@ -267,7 +267,7 @@ Happy path of a generic event. Pseudo Code:
 ```
 
 
-# proccess: creane new instance of a (generic) domain aggregate
+# proccess: create new instance of a (generic) domain aggregate
 # each container is a phisical component, 
 # Client is an SSR server, 
 # Event Bus is the internal-global (at back-end level) comunication channel, 

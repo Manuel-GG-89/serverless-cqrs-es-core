@@ -6,7 +6,7 @@ This README file is under construction and has constant changes, sometimes they 
 
 *** 
 
-UPDATE: I think I made a mistake in this warning. I have been doing some research and it is possible that there are ways to use ephemeral environments on SSR servers, but I need to try and test. Please do not consider the following warning until you have, it could be wrong.
+UPDATE: I think I made a mistake in this warning. I have been doing some research and it is possible that there are ways to use ephemeral environments on SSR servers, but I need to try and test. Please do not consider the following warning, it could be wrong.
 
 ~~WARNING: FRONT-END engineers and  developers, unless you only need to serve static websites with very little interaction and no user authentication/authorization, I recommend you DO NOT USE SERVERLESS ENVIRONMENTS ON YOUR SSR BASED APPLICATIONS.~~
 

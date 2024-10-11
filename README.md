@@ -64,6 +64,7 @@ IMPORTANT TAKE:  FRONT-END DEVELOPERS who have used React Redux or any other des
 
 *** 
 ANOTHER TAKE: BACK-END Developers... You should not be intimidated by the Rust language. We are not low-level programmers. Our code is, in most cases, high-level code. Rust can be complex when used for low-mid-level software, but we... we just write functions and make APIs. Rust's rules are easy to learn and respect by working with this language at a high level. They are easy to master if your coding style is not based on OOP. If your code tends to be functional at the general level, and procedural at the granular level, you should not have problems. But if your coding style is based on OOP, inheritance, state mutation... Better not use Rust, use any other language that you master in which OOP is the base paradigm (java, python, go, ryuby, php, c++, etc.) following the architectural patterns described here. The language does not matter. It's just that Rust... for this kind of stuff is easy, and you get NASA performance without much effort. Give it a try. 
+
 ***
 
 *** 
@@ -160,6 +161,13 @@ Taking all of the above into consideration, a basic composition of a Domain Aggr
   - A simple reducer function shared as a lib between Command and Query handlers to fold(reduce) and rebuild the actual state of an agregate instance reading the (historical) events form the event-store.
   - An async, low-latency, API. In this context, Graphql can by good. But you can implement your own over websocket or you sefl-maded fine-tunned protocol and channel. The point is that it must be able to communicate with the SSR servers (server-to-server clients) in a simple, secure and efficient way.
 
+***
+SUGGESTION: Software developers/engineers should work primarily on command handlers and query handlers. These components, depending on which part of the domain the domain aggregate they belong to is solving, may grow in logic (although good software design shouldn't allow this to happen). To test the correct functioning of these components, integration tests are used, not unit tests.
+Is it necessary to do unit tests on these components?
+It is valid, but it should be avoided. It is valid when these components are developed based on OOP, imperative programming, procedural programming or with dynamic languages. It is avoidable when declarative programming, functional programming with static languages ​​is used. Components should not incorporate too many software pieces and low-level programmed pieces unless they are really necessary. Tests should be focused on the integration of all system components, and on the correct processing and execution of business rules. 
+
+So, as a suggestion in this context, it is preferable to use functional and declarative programming patterns, rather than object-oriented patterns, even if these language are multiparadigm (C#, Java, Go, Ruby, C++, etc.)
+***
 
 Next, I will deviate a little from the theoretical framework and explain the objectives limited to this particular project, and then return to the theoretical framework so that the explanations revolve around the objectives of the project in a practical way, preventing this from becoming an indigestible papyrus.
 

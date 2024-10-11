@@ -295,7 +295,7 @@ type commandParams = [...inputParams, aggProjectionID]
 
 # then (pseudo code flow):
 
-Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(aggProjectionID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
+Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(aggProjectionID)) >> queryAggerateByIdAndWait(aggProjectionID) >..waiting..> ] 
                         ↓                                                              ↑
 Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(aggProjectionID))] 
                         ↓                                                              ↑

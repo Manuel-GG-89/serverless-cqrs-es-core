@@ -293,11 +293,11 @@ type commandParams = [...inputParams, aggProjectionID]
 
 # pseudo flow:
 
-Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
+Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(aggProjectionID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
                         ↓                                                              ↑
-Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(ID))] 
+Api[ doSomethingCommand(commandParams) >> implicitSendCommandAndWait(commandParams) && respondToWaitingClient(Success(aggProjectionID))] 
                         ↓                                                              ↑
-Command_Handler[ validate_rules(commandParams) >>  emmit_to_bus(newEventCreated) && respond_to_api_with_ID(newEventCreated.aggregateInstance.ID) ] 
+Command_Handler[ validate_rules(commandParams) >>  emmit_to_bus(newEventCreated) && respond_to_api_with_ID(Success(aggProjectionID) ] 
                         ↓
 Evento_Bus[ delivers(newEventCreated) ] 
                         ↓
@@ -305,7 +305,7 @@ Event_Handler[ capture_and_store(newEventCreated) >> rebuild_new_aggregate_insta
                         ↓
 Api[ onAggregateEventEmited( passEventToApiQueryHandler(Some(newAggregateInsanceState)) ) ]
                         ↓
-Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  cachOrUpdatAggregateInstanceProjectionAndAnyOtherSSRprocess(newAggregateInstanceState) && sendToUserUI(newAggregateInstanceState) ]
+Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  cachOrUpdatAggregateInstanceProjectionAndAnyOtherSSRprocess(newAggregateInstanceState) && updateOrNotifyUserUI(newAggregateInstanceState) ]
 ```
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 

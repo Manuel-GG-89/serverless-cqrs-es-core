@@ -164,7 +164,7 @@ Techical Objetives:
 Challenge stuffs (outside the obvious DDD things):
   - Keep it simple. Keep it really simple.
   - Security layers / Authentication / Authorization.
-  - Minimal cooldown start times in a lambda environment (currently I am using simplest Rust functions... 20ms or less at cooldownm start time, it's crazy)
+  - DSL, Domain-specific language: Separating business rules from code, so that they can be modified by people who only have business knowledge, but not IT knowledge. Json, XML or another common format can be used, so that the software, at compile time (better performance and security) or even at runtime, can interpret them and incorporate them into the business policy/rule validator. It is a common practice in corporate software, but there must be a consistent design of the internal and external DSL.
 
 Resources, tools and technical stuffs:
   - AWS CDK to declare and configure all resources (default typescript cdk version)

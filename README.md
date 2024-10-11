@@ -265,11 +265,12 @@ Consider that the 'client' is a front-end server (ssr) that interacts through a 
 Happy path of a generic client-server domain aggregate flow. An SSR server (the 'client') send a command to an aggregate (the 'server') through their grapql api. 
 Pseudo Code:
 ```
-# proccess: create new instance of a (generic) domain aggregate
-# each container is a phisical component, 
+# Proccess: create new instance of a (generic) domain aggregate
+# Each container is a phisical (or virtual) component, 
 # Client is an SSR server, 
 # Event Bus is the internal-global (at back-end level) comunication channel, 
-# The other ones are part of a domain aggregate
+# The other ones are part of a domain aggregate (lambda functions).
+# We need types that reprecent the responses in a functional way (since lambdas are functions):
 
 enum CommandHandlerResponse<T, E> {
     Success(T),
@@ -282,13 +283,13 @@ enum QueryHandlerResponse<T, E> {
 }
 
 # At basic level, the aggregate projection ID (the current state of a domain aggregate instance)
-# is composed by the ID of the aggregate instance plus the version (serial number) of the projection.
+# is composed by the ID of the instance plus the version (serial number) of the projection.
 # The version change every time that a new event is generated for that aggregate instance (is a correlative number) 
 # This composition is 'Maybe' (maybe type) because 'createNewIntance' commands have not id and version of an aggregate yet.
 # So:
 
 type aggProjectionID = Maybe({ID, version}) 
-type commandParams = [..inputParams, aggProjectionID] 
+type commandParams = [...inputParams, aggProjectionID] 
 
 # pseudo flow:
 

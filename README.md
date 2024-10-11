@@ -244,15 +244,28 @@ Consider that the client is a front-end server (ssr) that interacts through a gr
 
 Happy path of a generic event. Pseudo Code:
 ```
- enum CommandHandlerResponse<T, E> {
-      Success(T),
-       Error(E),
-    }
+
+
+# proccess: creane new instance of a (generic) domain aggregate
+# each container is a phisical component, 
+# Client is an SSR server, 
+# Event Bus is the internal-global (at back-end level) comunication channel, 
+# The other ones are part of a domain aggregate
+
+type aggProjectionID = Maybe({ID, version}) # meybe, because createNewIntance commands have not id and version (serial number) of an aggregate yet.
+type commandParams = [..inputParams, aggProjectionID] 
+
+enum CommandHandlerResponse<T, E> {
+    Success(T),
+    Error(E),
+}
+
 enum QueryHandlerResponse<T, E> {
-      Some(T),
-      Error(E),
-    }
-type commandParams = [..inputParams, maybe(ID)]  # maybe(ID) because createNewIntance commands have not id.
+    Some(T),
+    Error(E),
+}
+
+# pseudo flow:
 
 Client[ callApiAndWait( doSomethingCommand(commandParams)) >..waiting..> onCommandRespond(Success(ID)) >> queryAggerateByIdAndWait(ID) >..waiting..> ] 
                         ↓                                                              ↑
@@ -271,7 +284,6 @@ Client[ >..waiting..> onQueryByIdResponds(Some(newAggregateInstanceState)) >>  c
 
 .. well, it seems like a long and slow proccess just for a simple interaction... 
 .. I can say you that meybe not :)
-
 
 
 Considerations in front-end/back-end, communication, components and eventual consistency:

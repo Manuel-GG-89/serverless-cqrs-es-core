@@ -12,7 +12,7 @@ UPDATE: I think I made a mistake in this warning. I have been doing some researc
 
 
 
-~~There is no secure way to handle server-browser sessions in ephemeral environments, and there are no truly effective strategies to manage cache in such environments. You will only end up with applications that will be slow to load, and (unless the serverless environments that brings up the App is always ON... like any webserver) you will not get any benefit. It's not worth it, even with a PHP server you would get better performance and security.~~ 
+~~There is no secure way to handle server-browser sessions in ephemeral environments, and There are no truly effective strategies to manage cache in such environments. You will only end up with applications that will be slow to load, and (unless the serverless environments that brings up the App is always ON... like any webserver) you will not get any benefit. It's not worth it, even with a PHP server you would get better performance and security.~~ 
 
 ~~The best option at the moment is to use stateful servers (node/deno ​​servers, for example) with several nodes if it is really necessary, and good cache management.  If the pattern described here is implemented correctly in the back-end (even-drive, event-sourced, cqrs), you can take advantage of the benefits of it  by caching all the responses from the backend (updated projections) without any complexities, and use them like a first source of data before querying the server.~~
 
@@ -52,7 +52,7 @@ This is about software design and architecture. This is about Domain Driven Desi
 
 - note 0: This project is intended to make a CORE SYSTEM ONLY.. and how it communicates internally and externally. Could it be used as Core of a web application? Yes, in fact, that is the goal... the thing is... not in the same way you would usually expect. There is no mutation, no CRUD, ..no database magic under de hood.
 
-- note 1: The first sketches and proofs of concepts were developed in Typescript/Python... now rewriting same things in Rust (just the functions). Buy why Rust? only because I consider that, in this context (stateless, serverless web services), you get unsurpassed performance without using the language at low level, just using high-level api features, which is almost like developing in any other popular modern language (it's almost like writing typescript). There is no low level programming here, so there is no need to panic. Also, in essence, you can use whatever language you prefer or best suits each part of the system. It is totally valid that in this type of system, each domain aggregate ('micro-service' in old school terms) uses a different language, which best suits the needs of the domain aggregate.
+- note 1: The first sketches and proofs of concepts were developed in Typescript/Python... now rewriting same things in Rust (just the functions). Buy why Rust? only because I consider that, in this context (stateless, serverless web services), you get unsurpassed performance without using the language at low level, just using high-level api features, which is almost like developing in any other popular modern language (it's almost like writing typescript). There is no low level programming here, so There is no need to panic. Also, in essence, you can use whatever language you prefer or best suits each part of the system. It is totally valid that in this type of system, each domain aggregate ('micro-service' in old school terms) uses a different language, which best suits the needs of the domain aggregate.
 
 - note 2: Front-end servers aren´t considered on this project yet.. but I will expose some ideas regarding the front-end and how this design be taken advantage of by fron-end system enginners in terms of asynchronous communication and caching by default. 
 
@@ -278,13 +278,15 @@ Pseudo Code:
 # Event Bus is the internal-global (at back-end level) comunication channel, 
 # The other ones are part of a domain aggregate (lambda functions).
 
-# We need types that reprecent the responses in a functional way (since lambdas are functions):
+# AWS event flow:
+cache/SSR <-> Appsync <-> Lambda -> Event bridge -> Lambda (DynamoDb) -> Lambda -> Appsync -> SSR/cache
 
+# We need types that reprecent the responses
+# in a functional way (since lambdas are functions):
 enum CommandHandlerResponse<T, E> {
     Success(T),
     Error(E),
 }
-
 enum QueryHandlerResponse<T, E> {
     Some(T),
     Error(E),

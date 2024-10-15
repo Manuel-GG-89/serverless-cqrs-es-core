@@ -169,9 +169,19 @@ Taking all of the above into consideration, a basic composition of a Domain Aggr
   - An async, low-latency, API. In this context, Graphql can by good. But you can implement your own over websocket or you sefl-maded fine-tunned protocol and channel. The point is that it must be able to communicate with the SSR servers (server-to-server clients) in a simple, secure and efficient way.
 
 ***
-SUGGESTION: Software developers/engineers should work primarily on command handlers and query handlers. These components, depending on which part of the domain the domain aggregate they belong to is solving, may grow in logic (although good software design shouldn't allow this to happen). To test the correct functioning of these components, integration tests are used, not unit tests.
-Is it necessary to do unit tests on these components?
-It is valid, but it should be avoided. It is valid when these components are developed based on OOP, imperative programming, procedural programming or with dynamic languages. It is avoidable when declarative programming, functional programming with static languages ​​is used. Components should not incorporate too many software pieces and low-level programmed pieces unless they are really necessary. Tests should be focused on the integration of all aggregate domain component, and on the correct processing and execution of business rules. 
+SUGGESTION:
+
+Software developers/engineers should work primarily on command handlers and query handlers. 
+In addition, they must work on the management of errors in the internal (at Event Bus level) and external (at Async Api level) distribution of events, which can be handled in different ways, but the usual thing is through Timeouts, Dead-Letter Queues and compensation events.
+These components, depending on which part of the domain the domain aggregate they belong to is solving, may grow in logic (although good software design shouldn't allow this to happen). To test the correct functioning of these components, integration tests are used, not unit tests.
+
+Is it necessary to do unit tests on these components? (I mean, functions and modules declared inside lambda functions)
+It is valid, but it should be avoided. 
+It is valid when these components are developed based on OOP, imperative programming, procedural programming or with dynamic languages. 
+It is avoidable when a declarative programming, functional programming pattern with static languages ​​is used (Regardless of the language is used and if this is "pure functional language"  or a multiparadigma language). 
+
+Components should not incorporate too many software pieces and low-level programmed pieces unless they are really necessary. 
+Tests should be focused on the integration of all aggregate domain components, correct event distribute and on the correct processing and execution of business rules. 
 
 So, as a suggestion in this context, it is preferable to use functional and declarative programming patterns, rather than object-oriented patterns, even if these language are multiparadigm like C#, Java, Go, Typescript, C++, etc. This can be achieved without much fuss in any of those languages following these conventions:
 

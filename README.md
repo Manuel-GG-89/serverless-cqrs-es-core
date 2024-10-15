@@ -299,7 +299,7 @@ Webserver[(readCachedProjectionIfExist || getPrjectionInsanceFromQuery) && build
 -> Event bridge 
 -> Lambda (saveEventInDynamoDb && notifyClient(s)) 
 -> Appsync 
--> Webserver(updateOrCreateCachedProjection && notifyClient) 
+-> Webserver[(updateOrCreateCachedProjection && notifyClient)] 
 
 # We need types that reprecent the responses
 # in a functional way (since lambdas are functions):

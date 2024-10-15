@@ -265,7 +265,9 @@ So.. why Graphq and not an http api with webhooks or callbacks?
   - And callbacks.... well, callback hell? I dont even know...
   - ...So far, this is the best option I’ve found to achieve that result, but there might be better ones. So, before implementing the communication interfaces, I’ll need to research again, I think.
 
-
+*** 
+IMPORTANT TAKE ABOUT FRONT-END SERVER: THEY CONTAIN A PART OF THE CORE: THE PROJECTIONS (passively  cached current/updated aggregate instances, es decir, los modelos de datos actualizados (instancias)  con las que cada nodo del front-end ha interactuado o interactuda frecuentemente)
+***
 Let's see a simple flow of a Client - Server interaction. 
 Consider that the 'client' is a front-end server (ssr) that interacts through a graphql api with the core of the system (the 'server') asynchronously, without blocking the user's UI (perhaps using a feature like React Suspense or similar)
 

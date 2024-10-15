@@ -275,7 +275,7 @@ Consider that the 'client' is a front-end server (ssr) that interacts through a 
 WARNING: The flow described below does not incoma the management of errors both in the internal and external distribution of the events produced by the Command-Handler.This is an issue that will be discussed later in detail, but in sishesis, the errors that can occur in the distribution process of an event 
 They are treated as follows:
 
-1-Through Timeout on the client's side and also on the event bus, which is sent to a Dead-Leet Queue in the case that problems occur in the distribution of the new event from the Command-Handler to the data bus (If the new event does not reach all the Event-Handlers consumers). 
+1-Through Timeout on the client's side and also on the event bus, which is sent the incoming event to a Dead-Leet Queue in the case that problems occur in the distribution of the new event from the Command-Handler to the data bus (If the new event does not reach all the Event-Handlers consumers). 
 If the event was only received by some consumers, then a compensation event is generated that reverses the information added by the partially ditribuated event to consumers who received said event.
 If the event was not received by any consumer, then there is no need to redistribute the event, however, it is important to generate a response to the webserver client that the command that was requested could only be validated, but not processed.
 

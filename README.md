@@ -18,9 +18,17 @@ UPDATE: I think I made a mistake in this warning. I have been doing some researc
 
 ***
 
-CLARIFICATION: Capturing telemetry data and tracking user behavior is not why this software design patterns were created. Can they be used for that? Of course, but that's not the goal. This type of decentralized software design arose from the need to create systems in which their domain entities operates truly decoupled, both in their application layer and in their data layer. It is an answer to solve the problems (inconsistencies?) presented by decentralized software architectures based on microservices, where its application layer is decoupled, but its data layer is not... where, in the end, each microservice that needs data from another entity in the domain must make a request to said entity to obtain the states of its instances, or its databases are shared... which makes all the paraphernalia to decentralize the software in microservices become a non sense. 
+CLARIFICATION: 
 
-Furthermore, in many domains, by definition and nature (and in many cases, because the law establishes it), the data needs to be stored as a succession of immutable events. 
+Capturing telemetry data and tracking user behavior is not why this software design patterns were created. Can they be used for that? Of course, but that's not the goal.
+
+This type of decentralized software design arose from the need to create systems in which their domain entities operates truly decoupled, both in their application layer and in their data layer. It is an answer to solve the problems (inconsistencies?) presented by decentralized software architectures based on microservices, where its application layer is decoupled, but its data layer is not... where, in the end, each microservice that needs data from another entity in the domain must make a request to said entity to obtain the states of its instances, or its databases are shared... which makes all the paraphernalia to decentralize the software in microservices become a non sense. 
+
+You must keep in mind that not all components of the system needs to be handled by this pattern, for example, User's entity handlers and authentications/authorization handlers could by handled in a traditional services (within a sql database) or by other external systems.
+
+... so, then:
+
+In many domains, by definition and nature (and in many cases, because the law establishes it), the data needs to be stored as a succession of immutable events. 
 
 For example, in banking and financial systems, at least where I live, by law the minutes of movements and transactions carried out must be kept as immutable events. 
 
@@ -30,14 +38,15 @@ Another example: In passenger transport domain, by their nature, each signal rec
 
 Another example: Many video games, online or offline, especially sports and competitive ones, store the match in the form of a succession of events. For many years, even before the internet was popular, soccer videogames, racing videogames, shooters, and many others, were (and are) able to completely reproduce the entire match, in fact, you can save it and view it later. How do they achieve this? because the core of their systems saves each state change as a sequence of events by default. 
 
-Have you ever played Fortnite? You can completely replay the match when you finish it... and it is not stored by saving the rendered data... since each state changes in the match is an event, and its history is a succession of events, these can be replayed later whithin no  additional cost in the videogame engine. The Ram memory records each state change of the match as a succession of events that, from time to time, are dumped into a cache file (to free up memory), thus which finally achieves a complete record of each action of the match. This is why many video games are capable of replaying matches in their entirety after finishing the match, or even before having finished playing them... In soccer videogames and other sports, at any time during the match you can pause and check the replay back. Also, this data could be used by Epic (and their third party afiliates) to improve anti-cheats and make better mechanics to catch troll/hater users analyzing suspicious user behavior in real time, but I'm not sure if they do this.
+Have you ever played Fortnite? You can completely replay the match when you finish it... and it is not stored by saving the rendered data, since each state changes in the match is an event, and its history is a succession of events, these can be replayed later whithin no  additional cost in the videogame engine. The Ram memory records each state change of the match as a succession of events that, from time to time, are dumped into a cache file (to free up memory), thus which finally achieves a complete record of each action of the match. This is why many video games are capable of replaying matches in their entirety after finishing the match, or even before having finished playing them... In soccer videogames and other sports, at any time during the match you can pause and check the replay back. Also, this data could be used by Epic (and their third party afiliates) to improve anti-cheats and make better mechanics to catch troll/hater users analyzing suspicious user behavior in real time, but I'm not sure if they do this.
 
 Even in Play Station 1, Winning Eleven (a Classic, Anthological soccer video game) you could replay the match at any time while you were playing it. How do you think they were able to do it? Because its core was event-driven by default, that was (and still is) the most efficient way to handle changes in the game state by its core. Enabling the functionality to replay those events was trivial, since the software design already provided this feature out of the box.
 This doesn't apply to all video games, but it's a common strategy applied to competitive video games.
 
 There are hundreds of cases where this paradigm is not an option, but rather an intrinsic requirement of the domain.
 
-Was generative artificial intelligence created in order to maximize the economic benefits of the companies that finance its development?? I think not, but the reality is that this technology allows it. It depends on each person and entity what use is given to said technology.
+Was generative artificial intelligence created in order to maximize the economic benefits of the companies that finance its development?? 
+I think not, but the reality is that this technology allows it. It depends on each person and entity what use is given to said technology.
 
 
  ***

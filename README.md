@@ -272,7 +272,7 @@ Let's see a simple flow of a Client - Server interaction.
 Consider that the 'client' is a front-end server (ssr) that interacts through a graphql api with the core of the system (the 'server') asynchronously, without blocking the user's UI (perhaps using a feature like React Suspense or similar)
 
 *** 
-WARNING: The flow described below does not incoma the management of errors both in the internal and external distribution of the events produced by the Command-Handler.This is an issue that will be discussed later in detail, but in sishesis, the errors that can occur in the distribution process of an event 
+WARNING: The flow described below does not incorporate  the management of errors both in the internal and external distribution of the events produced by the Command-Handler.This is an issue that will be discussed later in detail, but in sishesis, the errors that can occur in the distribution process of an event 
 They are treated as follows:
 
 1-Through Timeout on the client's side and also on the event bus, which is sent the incoming event to a Dead-Leet Queue in the case that problems occur in the distribution of the new event from the Command-Handler to the data bus (If the new event does not reach all the Event-Handlers consumers). 

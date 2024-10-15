@@ -287,22 +287,19 @@ Happy path of a generic client-server domain aggregate flow. An SSR server (the 
 Pseudo Code:
 ```
 # Proccess: create or modify an instance of a (generic) domain aggregate by send a command.
-# Each container is a phisical (or virtual) component: 
-# Client is an SSR server, 
-# Event Bus is the internal-global (at back-end level) comunication channel, 
-# The other ones are part of a domain aggregate (lambda functions).
 
 # AWS event flow (Only Happy path. Error paths have a dead-letter Queue that handle and notify errors to clients):
-Webserver[(readCachedProjectionIfExist || getPrjectionInsanceFromQuery) && buildAndSendCommand] 
+Webserver[(readCachedProjectionInstanceIfExist || getProjectionInsanceFromAppsyncApiQuery) && buildAndSendCommand] 
 <-> Appsync 
 <-> Lambda 
 -> Event bridge 
--> Lambda (saveEventInDynamoDb && notifyClient(s)) 
+-> Lambda (saveEventInDynamoDb && notifyWebserverClients(s)ThroughAppsyncApi) 
 -> Appsync 
 -> Webserver[(updateOrCreateCachedProjection && notifyClient)] 
 
 # We need types that reprecent the responses
 # in a functional way (since lambdas are functions):
+
 enum CommandHandlerResponse<T, E> {
     Success(T),
     Error(E),
@@ -321,6 +318,11 @@ enum QueryHandlerResponse<T, E> {
 type aggProjectionID = Maybe({ID, version}) 
 
 type commandParams = [...inputParams, aggProjectionID] 
+
+# Each container described below is a phisical (or virtual) component: 
+# Client is an SSR server, 
+# Event Bus is the internal-global (at back-end level) comunication channel, 
+# The other ones are part of a domain aggregate (lambda functions).
 
 # then (pseudo code flow):
 

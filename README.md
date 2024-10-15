@@ -292,8 +292,14 @@ Pseudo Code:
 # Event Bus is the internal-global (at back-end level) comunication channel, 
 # The other ones are part of a domain aggregate (lambda functions).
 
-# AWS event flow:
-cache/SSR <-> Appsync <-> Lambda -> Event bridge -> Lambda (DynamoDb) -> Lambda -> Appsync -> SSR/cache
+# AWS event flow (Only Happy path. Error paths have a dead-letter Queue that handle and notify errors to clients):
+Webserver[(readCachedProjectionIfExist || getPrjectionInsanceFromQuery) && buildAndSendCommand] 
+<-> Appsync 
+<-> Lambda 
+-> Event bridge 
+-> Lambda (saveEventInDynamoDb && notifyClient(s)) 
+-> Appsync 
+-> Webserver(updateOrCreateCachedProjection && notifyClient) 
 
 # We need types that reprecent the responses
 # in a functional way (since lambdas are functions):

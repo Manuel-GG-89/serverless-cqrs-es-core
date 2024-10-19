@@ -6,15 +6,17 @@ This README file is under construction and has constant changes, sometimes they 
 
 *** 
 
-UPDATE: I think I made a mistake in this warning. I have been doing some research and it is possible that there are ways to use ephemeral environments on SSR servers, but I need to try and test. Please do not consider the following warning, it could be wrong.
+UPDATE - BACK-END ENGINNERS: If what you try is to migrate a system that is currently implemented with microservices, but without this pattern (of the traditional form) towards this type of systems (Event-Driven), you should start little by little, one service at the same time(Micro-service or set of microservices).
 
-~~WARNING: FRONT-END engineers and  developers, unless you only need to serve static websites with very little interaction and no user authentication/authorization, I recommend you DO NOT USE SERVERLESS ENVIRONMENTS ON YOUR SSR BASED APPLICATIONS.~~
+The simple way to talk microservices that work with a database and mutable tables is:
 
+- Add an additional field 'version' to a table that the microservic entity reprieves.
+- Every time one or more of said table is mutated in a only transaction, the microservice must increase by 1 (version 1, version 2, version 3, etc) the 'version' field of that table and, in addition, you must send aData bus event indicating the change of version of the instance, next to the fields that were mutated.
+- The domain aggregates that are receiving the events of said entity must generate the chorosphere changes in their events (those who handle that entity)
+- Each query that is carried out (externally) must be answered including the 'version' of the instance on which they were based to answer the Query.
+- And, finally, in each Query that includes any data of the instances that are not event-soured, the version of said INTANCE on which they were based should be included.
 
-
-~~There is no secure way to handle server-browser sessions in ephemeral environments, and There are no truly effective strategies to manage cache in such environments. You will only end up with applications that will be slow to load, and (unless the serverless environments that brings up the App is always ON... like any webserver) you will not get any benefit. It's not worth it, even with a PHP server you would get better performance and security.~~ 
-
-~~The best option at the moment is to use stateful servers (node/deno ​​servers, for example) with several nodes if it is really necessary, and good cache management.  If the pattern described here is implemented correctly in the back-end (even-drive, event-sourced, cqrs), you can take advantage of the benefits of it  by caching all the responses from the backend (updated projections) without any complexities, and use them like a first source of data before querying the server.~~
+The above will allow to maintain the eventual consistency even with services or microservices that are not operating with Event-Stores (only with traditional databases)
 
 ***
 

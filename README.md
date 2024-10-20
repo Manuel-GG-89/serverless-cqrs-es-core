@@ -94,6 +94,9 @@ so, do some reserch to understand the basics:
   - https://www.google.com/search?q=domain+driven+design - "Domain Driven Design" ( DDD )
 
 
+  - https://www.youtube.com/watch?v=P1vES9AgfC4 Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin - 12 abril 2024
+
+
 Events Storming: It is the way in which these systems are designed, starting with an understanding of the domain, its problems, flows, interactions, rules, policies, etc, In terms of Imperative Commands (imperative orders, like many unix commands) and Events (inmutable past facts) produced by those commands. And all you need is a big whiteboard,  a lot of colored sticky notes and a collaboration effort between Users and Enginners to descrive it. No technical knowledge is required at this stage, only knowledge of the domain to be described.
 
   - https://www.google.cl/search?q=event+storming 
